@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject healthBarPrefab;
     private UiBar healthBarRef;
     public GameObject player;
+    public GameObject healthBarCanvas;
     private Rigidbody2D rb;
     private NavMeshAgent agent;
     [SerializeField] private float moveSpeed = 5f;
@@ -34,12 +35,15 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
 
-        GameObject healthBar =  Instantiate(healthBarPrefab,transform);
-        healthBarRef = healthBar.GetComponentInChildren<UiBar>();
+        healthBarCanvas =  Instantiate(healthBarPrefab,transform);
+        healthBarRef = healthBarCanvas.GetComponentInChildren<UiBar>();
 
         Health = maxHealth;
     }
-
+    private void Update()
+    {
+        healthBarCanvas.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+    }
     void FixedUpdate()
     {
         if (player != null)
