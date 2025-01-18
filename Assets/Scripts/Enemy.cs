@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,7 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject healthBarPrefab;
     private UiBar healthBarRef;
     public GameObject player;
+    public GameObject healthBarCanvas;
     private Rigidbody2D rb;
+    private NavMeshAgent agent;
     [SerializeField] private float moveSpeed = 5f;
     public float Health
     {
@@ -30,26 +31,32 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        Health = maxHealth;
         player = LevelManager.Instance.player;
         rb = GetComponent<Rigidbody2D>();
-        GameObject healthBar =  Instantiate(healthBarPrefab,transform);
-        healthBarRef = healthBar.GetComponentInChildren<UiBar>();
-    }
+        agent = GetComponent<NavMeshAgent>();
 
+        healthBarCanvas =  Instantiate(healthBarPrefab,transform);
+        healthBarRef = healthBarCanvas.GetComponentInChildren<UiBar>();
+
+        Health = maxHealth;
+    }
+    private void Update()
+    {
+        healthBarCanvas.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+    }
     void FixedUpdate()
     {
         if (player != null)
         {
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-
-            rb.velocity = direction * moveSpeed;
+            agent.SetDestination(player.transform.position);
         }
     }
+
     private void Die()
     {
         Destroy(gameObject);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Sword swordRef;
