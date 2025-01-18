@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class InputManager : Singleton<InputManager>
 {
     public PlayerInput playerInput;
-    
+
+    public static Vector2 mousePosition;
+
     [Range(0.0f, 0.5f)] public float mouseSmoothTime = 0.03f;
     [HideInInspector] public Vector2 currentMouseDelta = Vector2.zero;
     [HideInInspector] public Vector2 MovementVector;
@@ -18,6 +20,7 @@ public class InputManager : Singleton<InputManager>
     
     private void FixedUpdate()
     {
+        mousePosition = playerInput.Universal.MousePosition.ReadValue<Vector2>();
         MovementVector = playerInput.InGame.Movement.ReadValue<Vector2>();
     }
     

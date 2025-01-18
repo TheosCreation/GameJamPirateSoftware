@@ -94,6 +94,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Universal"",
+            ""id"": ""5782c835-1072-4643-936d-517b9483c55a"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""dfe53f74-ae88-4e68-8db0-dce9fbe8733c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c2d81b74-c20d-445e-8699-a46b2a647efe"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -101,6 +129,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // InGame
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_Movement = m_InGame.FindAction("Movement", throwIfNotFound: true);
+        // Universal
+        m_Universal = asset.FindActionMap("Universal", throwIfNotFound: true);
+        m_Universal_MousePosition = m_Universal.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,8 +235,58 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public InGameActions @InGame => new InGameActions(this);
+
+    // Universal
+    private readonly InputActionMap m_Universal;
+    private List<IUniversalActions> m_UniversalActionsCallbackInterfaces = new List<IUniversalActions>();
+    private readonly InputAction m_Universal_MousePosition;
+    public struct UniversalActions
+    {
+        private @PlayerInput m_Wrapper;
+        public UniversalActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_Universal_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Universal; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UniversalActions set) { return set.Get(); }
+        public void AddCallbacks(IUniversalActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UniversalActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UniversalActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+        }
+
+        private void UnregisterCallbacks(IUniversalActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+        }
+
+        public void RemoveCallbacks(IUniversalActions instance)
+        {
+            if (m_Wrapper.m_UniversalActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUniversalActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UniversalActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UniversalActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UniversalActions @Universal => new UniversalActions(this);
     public interface IInGameActions
     {
         void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IUniversalActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
