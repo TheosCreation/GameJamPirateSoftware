@@ -3,8 +3,6 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float acceleration = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
     private float currentSwingSpeed;
