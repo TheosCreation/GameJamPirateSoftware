@@ -6,14 +6,35 @@ public class Sword : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float acceleration = 5f;
     [SerializeField] private float rotationSpeed = 10f;
+
+    private float currentSwingSpeed;
+    private float maxSwingSpeed;
+    private float previousRotation;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     private void FixedUpdate()
     {
         RotateTowardsMouse();
+        CalculateSwingSpeed();
     }
+
+    private void CalculateSwingSpeed()
+    {
+        float rotationDelta = Mathf.DeltaAngle(previousRotation, rb.rotation);
+
+        currentSwingSpeed = Mathf.Abs(rotationDelta / Time.fixedDeltaTime);
+
+        if (currentSwingSpeed > maxSwingSpeed)
+        {
+            maxSwingSpeed = currentSwingSpeed;
+        }
+
+        previousRotation = rb.rotation;
+    }
+
 
     private void RotateTowardsMouse()
     {
@@ -23,5 +44,13 @@ public class Sword : MonoBehaviour
 
         float rotation = Mathf.LerpAngle(rb.rotation, angle, rotationSpeed * Time.deltaTime);
         rb.MoveRotation(rotation);
+    }
+    public float GetCurrentSwingSpeed()
+    {
+        return currentSwingSpeed;
+    }
+    public float GetMaxSwingSpeed()
+    {
+        return maxSwingSpeed;
     }
 }
