@@ -21,13 +21,12 @@ public class Sword : MonoBehaviour
     private void FixedUpdate()
     {
         RotateTowardsMouse();
-        HandleMovement();
         LimitSpeed();
     }
 
     private void RotateTowardsMouse()
     {
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(InputManager.mousePosition);
         Vector2 direction = mousePosition - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
@@ -35,13 +34,6 @@ public class Sword : MonoBehaviour
         rb.rotation = rotation;
     }
 
-    private void HandleMovement()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            rb.AddForce(transform.up * acceleration);
-        }
-    }
 
     private void LimitSpeed()
     {
