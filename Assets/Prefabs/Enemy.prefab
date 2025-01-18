@@ -169,6 +169,7 @@ MonoBehaviour:
   currentHealth: 0
   healthBarPrefab: {fileID: 4586831603480137889, guid: e82eb37393cc8a54e9cb900486fd87b6, type: 3}
   player: {fileID: 0}
+  healthBarCanvas: {fileID: 0}
   moveSpeed: 5
 --- !u!1 &3676148028865382998
 GameObject:
