@@ -19,7 +19,7 @@ public class LevelManager : Singleton<LevelManager>
     private void Start()
     {
         Player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
-        enemySpawner.OnWaveComplete += StartNextWave;
+        enemySpawner.OnWaveComplete += ChooseUpgrade;
 
         currentSpawnInterval = initialSpawnIntervalPerWave;
         StartNextWave();
@@ -34,5 +34,13 @@ public class LevelManager : Singleton<LevelManager>
         enemySpawner.StartWave(totalEnemies, maxEnemy, currentSpawnInterval, Player.transform);
 
         UiManager.Instance.playerHud.UpdateRoundCounter(currentWave);
+    }
+
+    private void ChooseUpgrade()
+    {
+        UiManager.Instance.OpenUpgradeScreen();
+        PauseManager.Instance.PauseNoScreen();
+        PauseManager.Instance.canUnpause = false;
+        StartNextWave();
     }
 }
