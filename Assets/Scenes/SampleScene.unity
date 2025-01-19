@@ -545,6 +545,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8411319948518333236, guid: 105be53b32562554ea8683d16216d128, type: 3}
+      propertyPath: enemiesPrefab.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411319948518333236, guid: 105be53b32562554ea8683d16216d128, type: 3}
+      propertyPath: 'enemiesPrefab.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3156172657494923909, guid: e3df62c14a88de3408036387689c603f, type: 3}
+    - target: {fileID: 8411319948518333236, guid: 105be53b32562554ea8683d16216d128, type: 3}
+      propertyPath: 'enemiesPrefab.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6591687786885511824, guid: cff8d84ded17a794b84390be953ef4f1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5,20 +5,20 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] public float maxHealth = 2000f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] protected float currentHealth;
     [SerializeField] GameObject healthBarPrefab;
-    private UiBar healthBarRef;
+    protected UiBar healthBarRef;
     public float despawnDistance = 1000f;
     public Transform target;
     public GameObject healthBarCanvas;
-    private Rigidbody2D rb;
-    private NavMeshAgent agent;
-    [SerializeField] private GameObject enemyVisuals;
-    [SerializeField] private float moveSpeed = 5f;
+    protected Rigidbody2D rb;
+    protected NavMeshAgent agent;
+    [SerializeField] protected GameObject enemyVisuals;
+    [SerializeField] protected float moveSpeed = 5f;
     public float Health
     {
         get { return currentHealth; }
-        private set
+        protected set
         {
             currentHealth = Mathf.Clamp(value, 0f, maxHealth);
             if (healthBarRef  != null )
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     public Action OnDeath;
     public Action OnDespawn;
 
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
@@ -46,12 +46,12 @@ public class Enemy : MonoBehaviour
         Health = maxHealth;
     }
 
-    private void LateUpdate()
+    protected void LateUpdate()
     {
         enemyVisuals.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (target != null)
         {
@@ -63,19 +63,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected void Die()
     {
         OnDeath.Invoke();
         Destroy(gameObject);
     }
 
-    private void Despawn()
+    protected void Despawn()
     {
         OnDespawn.Invoke();
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         Sword swordRef;
         if (swordRef = collision.gameObject.GetComponent<Sword>())
