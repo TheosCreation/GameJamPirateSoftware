@@ -4,8 +4,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyFactory enemyFactory;
-    [SerializeField] private int maxEnemiesAlive = 10;
-    [SerializeField] private float spawnInterval = 2f;
+    private int m_maxEnemiesAlive = 10;
+    private float m_spawnInterval = 2f;
     [SerializeField] private float innerRadius = 5f; // Minimum distance from the player
     [SerializeField] private float outerRadius = 10f; // Maximum distance from the player
     [SerializeField] private float enemyDespawnRange = 50f;
@@ -22,11 +22,13 @@ public class EnemySpawner : MonoBehaviour
 
     public System.Action OnWaveComplete;
 
-    public void StartWave(int totalEnemies, Transform player)
+    public void StartWave(int totalEnemies, int maxEnemiesAlive, float spawnInterval, Transform player)
     {
         enemiesAlive = 0;
         enemiesSpawned = 0;
         enemiesToSpawn = totalEnemies;
+        m_spawnInterval = spawnInterval;
+        m_maxEnemiesAlive = maxEnemiesAlive;
         playerTransform = player;
         StartCoroutine(SpawnEnemies());
     }
@@ -35,12 +37,12 @@ public class EnemySpawner : MonoBehaviour
     {
         while (enemiesSpawned < enemiesToSpawn || enemiesAlive > 0)
         {
-            if (enemiesAlive < maxEnemiesAlive && enemiesSpawned < enemiesToSpawn)
+            if (enemiesAlive < m_maxEnemiesAlive && enemiesSpawned < enemiesToSpawn)
             {
                 SpawnEnemy(true);
             }
 
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(m_spawnInterval);
         }
 
         OnWaveComplete?.Invoke();

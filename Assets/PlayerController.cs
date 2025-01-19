@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.SetPaused(false);
+        InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
     }
 
     private void FixedUpdate()

@@ -46,14 +46,15 @@ public class PauseManager : Singleton<PauseManager>
         Time.timeScale = 0;
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void PauseNoScreen()
     {
         InputManager.Instance.DisableInGameInput();
         Time.timeScale = 0;
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         isPaused = true;
     }
 
