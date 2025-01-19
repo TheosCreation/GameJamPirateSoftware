@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    [SerializeField] private float rotationSpeed = 10f;
+    [HideInInspector] public Rigidbody2D rb;
+    public float rotationSpeed = 10f;
+    [HideInInspector] public float originalRotationSpeed = 0f;
 
     private float currentSwingSpeed;
     private float maxSwingSpeed;
@@ -11,6 +12,7 @@ public class Sword : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalRotationSpeed = rotationSpeed;
     }
 
     private void FixedUpdate()
@@ -43,10 +45,12 @@ public class Sword : MonoBehaviour
         float rotation = Mathf.LerpAngle(rb.rotation, angle, rotationSpeed * Time.deltaTime);
         rb.MoveRotation(rotation);
     }
+
     public float GetCurrentSwingSpeed()
     {
         return currentSwingSpeed;
     }
+
     public float GetMaxSwingSpeed()
     {
         return maxSwingSpeed;

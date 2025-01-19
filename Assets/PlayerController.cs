@@ -1,13 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     // Movement smoothing factor
-    [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float deceleration = 5f;
-    [SerializeField] private float moveSpeed = 10f;
+    public float acceleration = 5f;
+    public float deceleration = 5f;
+    public float moveSpeed = 10f;
+    [HideInInspector] public float originalMoveSpeed = 10f;
+    public Sword sword;
+
+    private float currentHealth = 0f;
+    public float maxHealth = 0f;
+    public float Health
+    {
+        get { return currentHealth; }
+        protected set
+        {
+            currentHealth = Mathf.Clamp(value, 0f, maxHealth);
+            UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth);
+            if (currentHealth <= 0f)
+            {
+                Die();
+            }
+        }
+    }
+    public List<ScalableUpgrade> upgrades = new List<ScalableUpgrade>();
+
+    public Action OnDeath;
 
     public bool isMoving = false;
 
@@ -15,7 +39,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        originalMoveSpeed = moveSpeed;
+        currentHealth = maxHealth;
+
         InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
     }
 
@@ -30,6 +56,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Die()
+    {
+        OnDeath?.Invoke();
+        //Destroy(gameObject);
+    }
 
     private void MoveWalk()
     {
@@ -72,5 +103,17 @@ public class PlayerController : MonoBehaviour
 
         // Combine the adjusted horizontal velocity with the current vertical velocity
         rb.velocity = new Vector2(newVelocity.x, newVelocity.y);
+    }
+
+    public void GiveItem(ScalableUpgrade upgrade)
+    {
+        // Check how many upgrades of the same type already exist
+        int existingCount = upgrades.Count(u => u.type == upgrade.type);
+
+        // Apply the upgrade with the new stack count
+        upgrade.ApplyUpgrade(this, existingCount);
+
+        // Add the new upgrade to the list
+        upgrades.Add(upgrade);
     }
 }

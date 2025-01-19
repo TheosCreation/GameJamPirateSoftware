@@ -84,4 +84,19 @@ public class Enemy : MonoBehaviour
            Health -= swordRef.GetCurrentSwingSpeed();
         }
     }
+
+    protected bool HasLineOfSight()
+    {
+
+        Vector3 direction = target.position - transform.position;
+        Debug.DrawRay(transform.position, direction, Color.red);
+        if (Physics2D.Raycast(transform.position, direction))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
