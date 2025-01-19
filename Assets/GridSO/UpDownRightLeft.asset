@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df6a6c5d6b874864cab458bda32fca0c, type: 3}
-  m_Name: Up
+  m_Name: UpDownRightLeft
   m_EditorClassIdentifier: 
   width: 5
   height: 5
-  directions: 01000000
+  directions: 01000000020000000300000004000000
   grid:
   - row: 0101010101
-  - row: 0100000001
-  - row: 0100000001
-  - row: 0100000001
+  - row: 0000000000
+  - row: 0000000000
+  - row: 0000000000
   - row: 0100000001

@@ -4,84 +4,116 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 
+using Random = UnityEngine.Random;
 
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-public enum Direction : byte
-{
-    NONE = 0b0000,  // 0
-    UP = 0b0001,    // 1
-    RIGHT = 0b0010, // 2
-    DOWN = 0b0100,  // 4
-    LEFT = 0b1000   // 8
-}
 
 
 [Serializable]
+
 public struct Node
 {
-    public Vector2[] directions;
     public GridData data;
 }
-
 public class TotalWaveCollapse : MonoBehaviour
 {
-    [Header("Arrays for each direction (existing fields)")]
-    public GridData[] upGrids;
-    public GridData[] rightGrids;
-    public GridData[] downGrids;
-    public GridData[] leftGrids;
+    [Header("Generation Settings")]
+    public int steps = 20;
 
-    [Header("Wave Function Collapse Settings")]
-    public int levelWidth = 5;     // Define grid size (width)
-    public int levelHeight = 5;    // Define grid size (height)
-    public int totalStates = 16;    // Number of possible states for each cell
-
-    [Tooltip("Check to run WFC on Start() automatically.")]
+    [Header("Run on start")]
     public bool runOnStart = false;
 
-
     [Header("Generation")]
-    [Tooltip("Reference your GridGenerator here. The collapsed wave will be visually generated if assigned.")]
     public GridGenerator gridGenerator;
-
-    [Tooltip("If true, will automatically generate a visual grid after WFC completes.")]
     public bool generateVisualGridOnComplete = true;
-    // ---------------------------------------------------------------------------------------------
     public Node[] nodes;
+
+    [Header("Nav Mesh")]
+    public NavMeshPlus.Components.NavMeshSurface meshSurface; 
+
+
+    private HashSet<Vector2> usedPositions = new HashSet<Vector2>();
+
     void Start()
     {
         if (runOnStart)
         {
-
-            GenerateLevel();
+            GenerateLevel(Vector2.zero, new Direction[0], 0, nodes[0].data.directions[0]);
         }
+        meshSurface.BuildNavMesh();
     }
-
 
     [ContextMenu("Generate Level (WFC)")]
-    public void GenerateLevel()
+    public void GenerateLevel(Vector2 cursorPos, Direction[] openDirections, int currentStep, Direction newDirection)
     {
-        Vector2 cursorPos = Vector2.zero;
-        Direction lastCursorDirection = Direction.NONE; // next open pos
-        switch (lastCursorDirection)
+        if (currentStep >= steps)
         {
-            case Direction.NONE:
-
-                break;
-            case Direction.UP:
-                break;
-            case Direction.RIGHT:
-                break;
-            case Direction.DOWN:
-                break;
-            case Direction.LEFT:
-                break;
+            Debug.Log("max steps reached");
+            return;
         }
 
+        Node? node = GetRandomNodeWithDirections(newDirection);
+        if (node == null)
+        {
+            Debug.Log("null node found");
+            return;
+        }
+
+        GridData data = node.Value.data;
+        if (data == null)
+        {
+            Debug.Log("null data found");
+            return;
+        }
+
+        openDirections = data.directions;
+        gridGenerator.GenerateGrid(data, cursorPos);
+
+        usedPositions.Add(cursorPos);
+
+        foreach (Direction direction in openDirections)
+        {
+            Vector2 newCursorPos = cursorPos + direction.ToVector2();
+            if (!usedPositions.Contains(newCursorPos))
+            {
+                GenerateLevel(newCursorPos, openDirections, currentStep + 1, direction);
+            }
+            else
+            {
+                Debug.Log("no position found");
+            }
+        }
     }
 
+    public Node? GetRandomNodeWithDirections(params Direction[] requiredDirections)
+    {
+        List<Node> matchingNodes = new List<Node>();
+        foreach (var node in nodes)
+        {
+            if (node.data != null && ContainsAllDirections(node.data.directions, requiredDirections))
+            {
+                matchingNodes.Add(node);
+            }
+        }
+
+        if (matchingNodes.Count == 0)
+        {
+            return null;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, matchingNodes.Count);
+        return matchingNodes[randomIndex];
+    }
+
+    private bool ContainsAllDirections(Direction[] nodeDirections, Direction[] requiredDirections)
+    {
+        foreach (var direction in requiredDirections)
+        {
+            if (Array.IndexOf(nodeDirections, direction) == -1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+

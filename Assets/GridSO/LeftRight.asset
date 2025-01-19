@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 5
   height: 5
+  directions: 0300000004000000
   grid:
   - row: 0101010101
   - row: 0000000000
   - row: 0000000000
   - row: 0000000000
   - row: 0101010101
-  directions: 0802

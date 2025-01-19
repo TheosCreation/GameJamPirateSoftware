@@ -1,4 +1,36 @@
+using System;
+using UnityEditor;
 using UnityEngine;
+
+public enum Direction
+{
+    None,
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+public static class DirectionExtensions
+{
+    public static Vector2 ToVector2(this Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return new Vector2(0, 1);
+            case Direction.Down:
+                return new Vector2(0, -1);
+            case Direction.Left:
+                return new Vector2(-1, 0);
+            case Direction.Right:
+                return new Vector2(1, 0);
+            default:
+                return Vector2.zero;
+        }
+    }
+}
+
 
 [System.Serializable]
 public class BoolArrayWrapper
@@ -15,8 +47,8 @@ public class GridData : ScriptableObject
 {
     public int width = 5;
     public int height = 5;
-    public BoolArrayWrapper[] grid;
     public Direction[] directions;
+    public BoolArrayWrapper[] grid;
 
     public void OnValidate()
     {
@@ -26,6 +58,16 @@ public class GridData : ScriptableObject
             for (int i = 0; i < height; i++)
             {
                 grid[i] = new BoolArrayWrapper(width);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < height; i++)
+            {
+                if (grid[i] == null || grid[i].row.Length != width)
+                {
+                    grid[i] = new BoolArrayWrapper(width);
+                }
             }
         }
     }
