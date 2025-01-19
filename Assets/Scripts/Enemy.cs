@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] GameObject healthBarPrefab;
     private UiBar healthBarRef;
-    public GameObject player;
+    public float despawnDistance = 1000f;
+    public Transform target;
     public GameObject healthBarCanvas;
     private Rigidbody2D rb;
     private NavMeshAgent agent;
@@ -29,9 +31,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public Action OnDeath;
+    public Action OnDespawn;
+
     void Start()
     {
-        player = LevelManager.Instance.player;
         rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
 
@@ -40,20 +44,33 @@ public class Enemy : MonoBehaviour
 
         Health = maxHealth;
     }
+
     private void Update()
     {
         healthBarCanvas.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
     }
+
     void FixedUpdate()
     {
-        if (player != null)
+        if (target != null)
         {
-            agent.SetDestination(player.transform.position);
+            agent.SetDestination(target.position);
+            if(Vector3.Distance(transform.position, target.position) > despawnDistance)
+            {
+                Despawn();
+            }
         }
     }
 
     private void Die()
     {
+        OnDeath.Invoke();
+        Destroy(gameObject);
+    }
+
+    private void Despawn()
+    {
+        OnDespawn.Invoke();
         Destroy(gameObject);
     }
 

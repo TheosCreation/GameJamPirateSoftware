@@ -107,6 +107,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""acee9b64-7c47-401f-866c-3fa870ac11ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,6 +127,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe76dcc6-fcf2-4eab-80ca-dd8b7bc43fc1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -132,6 +152,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Universal
         m_Universal = asset.FindActionMap("Universal", throwIfNotFound: true);
         m_Universal_MousePosition = m_Universal.FindAction("MousePosition", throwIfNotFound: true);
+        m_Universal_Escape = m_Universal.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,11 +261,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Universal;
     private List<IUniversalActions> m_UniversalActionsCallbackInterfaces = new List<IUniversalActions>();
     private readonly InputAction m_Universal_MousePosition;
+    private readonly InputAction m_Universal_Escape;
     public struct UniversalActions
     {
         private @PlayerInput m_Wrapper;
         public UniversalActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePosition => m_Wrapper.m_Universal_MousePosition;
+        public InputAction @Escape => m_Wrapper.m_Universal_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Universal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -257,6 +280,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IUniversalActions instance)
@@ -264,6 +290,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IUniversalActions instance)
@@ -288,5 +317,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IUniversalActions
     {
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

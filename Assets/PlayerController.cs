@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.SetPaused(false);
     }
 
     private void FixedUpdate()
