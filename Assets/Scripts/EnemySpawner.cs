@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float innerRadius = 5f; // Minimum distance from the player
     [SerializeField] private float outerRadius = 10f; // Maximum distance from the player
     [SerializeField] private float enemyDespawnRange = 50f;
+    [SerializeField] private int maxRetries = 20;
 
     [Space(20)]
     [SerializeField] private bool debug = false; // Maximum distance from the player
@@ -50,27 +52,49 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(bool trueSpawn)
     {
-        // Generate a random angle and distance
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        float distance = Random.Range(innerRadius, outerRadius);
+        bool validSpawnFound = false;
+        Vector3 spawnPosition = Vector3.zero;
 
-        // Calculate the position relative to the player
-        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * distance;
-        Vector3 spawnPosition = playerTransform.position + offset;
-
-        // Spawn the enemy at the calculated position
-        Enemy enemy = enemyFactory.CreateEnemy(spawnPosition);
-        enemy.target = playerTransform; // Assign the player as the target
-        enemy.despawnDistance = enemyDespawnRange; // Assign the player as the target
-        enemy.OnDeath += HandleEnemyDeath;
-        enemy.OnDespawn += HandleEnemyDespawn;
-
-        if(trueSpawn)
+        for (int attempt = 0; attempt < maxRetries; attempt++)
         {
-            enemiesSpawned++;
-            enemiesAlive++;
+            // Generate a random angle and distance
+            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            float distance = Random.Range(innerRadius, outerRadius);
+
+            // Calculate the position relative to the player
+            Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * distance;
+            spawnPosition = playerTransform.position + offset;
+
+            // Sample the NavMesh at the calculated position
+            if (NavMesh.SamplePosition(spawnPosition, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
+            {
+                spawnPosition = hit.position; // Use the closest point on the NavMesh
+                validSpawnFound = true;
+                break;
+            }
+        }
+
+        if (validSpawnFound)
+        {
+            // Spawn the enemy at the valid position
+            Enemy enemy = enemyFactory.CreateEnemy(spawnPosition);
+            enemy.target = playerTransform; // Assign the player as the target
+            enemy.despawnDistance = enemyDespawnRange; // Assign the player as the target
+            enemy.OnDeath += HandleEnemyDeath;
+            enemy.OnDespawn += HandleEnemyDespawn;
+
+            if (trueSpawn)
+            {
+                enemiesSpawned++;
+                enemiesAlive++;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Failed to find a valid spawn position after multiple attempts.");
         }
     }
+
 
     private void HandleEnemyDeath()
     {
