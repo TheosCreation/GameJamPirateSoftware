@@ -1,4 +1,3 @@
-// GridEditorWindow.cs
 using UnityEngine;
 using UnityEditor;
 
@@ -59,7 +58,7 @@ public class GridEditorWindow : EditorWindow
             EditorGUILayout.BeginHorizontal();
             for (int x = 0; x < currentGrid.width; x++)
             {
-                if (currentGrid.grid[y] == null) continue;
+                if (currentGrid.grid[y] == null || currentGrid.grid[y].row == null || x >= currentGrid.grid[y].row.Length) continue;
 
                 currentGrid.grid[y].row[x] = EditorGUILayout.Toggle(
                     currentGrid.grid[y].row[x],
