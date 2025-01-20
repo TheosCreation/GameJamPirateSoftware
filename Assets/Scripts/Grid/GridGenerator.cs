@@ -18,6 +18,7 @@ public class GridGenerator : MonoBehaviour
         {
             for (int x = 0; x < _data.width; x++)
             {
+      
                 if (_data.grid[y].row[x])
                 {
                     Vector3 position = new Vector3((startPosition.x* distance) + x * spacing, (startPosition.y* distance) + y * spacing, 0);

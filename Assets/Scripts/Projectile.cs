@@ -28,8 +28,8 @@ public class Projectile : MonoBehaviour
                 Enemy enemyRef = collision.gameObject.GetComponent<Enemy>();
                 if (enemyRef != null)
                 {
-                    Debug.Log("DO0 DAMAGE " + damage);
-                    enemyRef.TakeDamage(damage);
+
+                    enemyRef.TakeDamage(damage*10);
                     Destroy(gameObject);
                 }
             }

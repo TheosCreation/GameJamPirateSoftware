@@ -66,7 +66,10 @@ public class TotalWaveCollapse : MonoBehaviour
         }
 
         openDirections = data.directions;
-        gridGenerator.GenerateGrid(data, cursorPos);
+        if (cursorPos != Vector2.zero)
+        {
+            gridGenerator.GenerateGrid(data, cursorPos);
+        }
 
         usedPositions.Add(cursorPos);
 
