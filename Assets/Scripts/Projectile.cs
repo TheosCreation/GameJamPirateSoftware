@@ -6,11 +6,13 @@ public class Projectile : MonoBehaviour
     public float damage = 50f;
     private Vector3 direction;
     public bool reflected = false;
+    CircleCollider2D circleCollider;
     public void Initialize(Vector3 targetPosition)
     {
         direction = (targetPosition - transform.position).normalized;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(direction * speed);
+        circleCollider = rb.GetComponent<CircleCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,6 +45,7 @@ public class Projectile : MonoBehaviour
             {
                 reflected = true;
                 GetComponent<SpriteRenderer>().color = Color.green;
+                circleCollider.excludeLayers = 0; //Did consider not allowing player collisions but projectile mostly goes through the player and not reflected
             }
         }
     }

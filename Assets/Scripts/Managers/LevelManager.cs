@@ -12,6 +12,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private int maxEnemyPerWaveIncrement = 1;
     [SerializeField] private float enemySpeedMultiplierIncreaseIncrement = 0.05f;
     [SerializeField] private float spawnIntervalMultiplier = 0.9f;
+    [SerializeField] private float spawnIntervalCap = 0.1f;
 
     private float currentEnemySpeedIncreaseMultiplier = 1f;
 
@@ -42,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
         currentWave++;
         int totalEnemies = initialEnemiesPerWave + (currentWave - 1) * enemiesPerWaveIncrement;
         int maxEnemy = initialMaxEnemyPerWave + (currentWave - 1) * maxEnemyPerWaveIncrement;
-        currentSpawnInterval *= spawnIntervalMultiplier;
+        currentSpawnInterval = Mathf.Max(spawnIntervalCap, currentSpawnInterval * spawnIntervalMultiplier);
         currentEnemySpeedIncreaseMultiplier += enemySpeedMultiplierIncreaseIncrement;
         enemySpawner.StartWave(totalEnemies, maxEnemy, currentSpawnInterval, currentEnemySpeedIncreaseMultiplier, Player.transform);
 

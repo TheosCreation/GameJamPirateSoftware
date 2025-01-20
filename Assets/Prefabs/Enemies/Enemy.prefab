@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4218743577133767856}
   - component: {fileID: 3316178880404275312}
   - component: {fileID: 6282422893637898591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 800
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8544597138105082038}
   - component: {fileID: 8966303291108492343}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4364738208149918866}
   - component: {fileID: 7741356056285996329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
