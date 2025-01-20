@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRanged Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 143550224137826548, guid: e3df62c14a88de3408036387689c603f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3304521870726440455, guid: e3df62c14a88de3408036387689c603f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.507
@@ -51,6 +55,14 @@ PrefabInstance:
     - target: {fileID: 3304521870726440455, guid: e3df62c14a88de3408036387689c603f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676148028865382998, guid: e3df62c14a88de3408036387689c603f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575792143300758159, guid: e3df62c14a88de3408036387689c603f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7741356056285996329, guid: e3df62c14a88de3408036387689c603f, type: 3}
       propertyPath: m_Sprite
@@ -101,6 +113,7 @@ MonoBehaviour:
   maxHealth: 1000
   currentHealth: 0
   healthBarPrefab: {fileID: 4586831603480137889, guid: e82eb37393cc8a54e9cb900486fd87b6, type: 3}
+  damage: 100
   despawnDistance: 1000
   target: {fileID: 0}
   healthBarCanvas: {fileID: 0}

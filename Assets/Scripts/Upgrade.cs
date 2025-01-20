@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewUpgrade", menuName = "Upgrades/ScalableUpgrade")]
@@ -9,7 +10,7 @@ public class ScalableUpgrade : ScriptableObject
     public float baseValue = 1f;            // Base value of the upgrade
     public ScalingType scalingType = ScalingType.Linear;    // How the upgrade scales
     public float scalingFactor = 1f;        // Multiplier or factor for scaling
-
+    public Rarity rarity = Rarity.Common;
     public void ApplyUpgrade(PlayerController player, int existingCount)
     {
         float effectiveValue = 0f;
@@ -25,8 +26,11 @@ public class ScalableUpgrade : ScriptableObject
                 break;
 
             case UpgradeType.AttackSpeedBoost:
-                effectiveValue = CalculateEffectiveValue(existingCount, player.sword.rotationSpeed);
-                player.sword.rotationSpeed += effectiveValue;
+                foreach (var sword in player.swords)
+                {
+                    effectiveValue = CalculateEffectiveValue(existingCount, sword.rotationSpeed);
+                    sword.rotationSpeed += effectiveValue;
+                }
                 break;
 
             case UpgradeType.MovementSpeed:
@@ -35,17 +39,41 @@ public class ScalableUpgrade : ScriptableObject
                 break;
             
             case UpgradeType.SwordSize:
-                player.sword.transform.localScale *= 1 + scalingFactor; // we know its percentage based
-                break; 
-            case UpgradeType.SwordCount:
+                foreach (var sword in player.swords)
+                {
+                    effectiveValue = CalculateEffectiveValue(existingCount, sword.rotationSpeed);
+                    sword.rotationSpeed += effectiveValue;
+                }
                 break;
+            case UpgradeType.SwordCount:
+                player.AddSword();
+                break;
+  
 
             default:
                 Debug.LogWarning("Unknown upgrade type.");
                 break;
         }
+        player.Heal(Mathf.Infinity); // fulll healtyh
     }
-
+    public Color GetColorByRarity()
+    {
+        switch (rarity)
+        {
+            case Rarity.Common:
+                return Color.gray;
+            case Rarity.Uncommon:
+                return Color.green;
+            case Rarity.Rare:
+                return Color.blue;
+            case Rarity.Epic:
+                return new Color(0.5f, 0, 0.5f); // Purple
+            case Rarity.Legendary:
+                return Color.yellow;
+            default:
+                return Color.white;
+        }
+    }
     private float CalculateEffectiveValue(int existingCount, float currentValue = 0)
     {
         switch (scalingType)
@@ -90,4 +118,13 @@ public enum UpgradeType
     MovementSpeed,
     SwordSize,
     SwordCount
+}
+
+public enum Rarity
+{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
 }

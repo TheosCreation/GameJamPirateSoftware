@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6282422893637898591}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,6 +117,7 @@ MonoBehaviour:
   maxHealth: 2000
   currentHealth: 0
   healthBarPrefab: {fileID: 4586831603480137889, guid: e82eb37393cc8a54e9cb900486fd87b6, type: 3}
+  damage: 100
   despawnDistance: 1000
   target: {fileID: 0}
   healthBarCanvas: {fileID: 0}

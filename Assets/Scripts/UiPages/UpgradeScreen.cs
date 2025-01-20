@@ -2,12 +2,21 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class UpgradeScreen : UiPage
 {
     [SerializeField] private UpgradeButton upgradePrefab;
     [SerializeField] private Transform layoutTransform; 
     [SerializeField] private List<ScalableUpgrade> availableUpgrades;
+    private Dictionary<Rarity, float> rarityWeights = new Dictionary<Rarity, float>
+{
+    { Rarity.Common, 1.0f },
+    { Rarity.Uncommon, 0.7f },
+    { Rarity.Rare, 0.5f },
+    { Rarity.Epic, 0.25f },
+    { Rarity.Legendary, 0.1f }
+};
 
     protected override void OnEnable()
     {
@@ -20,10 +29,10 @@ public class UpgradeScreen : UiPage
         // Spawn 3 buttons with random upgrades
         for (int i = 0; i < 3; i++)
         {
-            int randomIndex = Random.Range(0, availableUpgrades.Count); 
-            ScalableUpgrade upgrade = availableUpgrades[randomIndex];
+            ScalableUpgrade upgrade = GetRandomUpgrade();
 
             UpgradeButton upgradeButton = Instantiate(upgradePrefab, layoutTransform);
+            upgradeButton.GetComponent<Image>().color = upgrade.GetColorByRarity();
 
             upgradeButton.button.onClick.AddListener(() =>
             {
@@ -33,6 +42,28 @@ public class UpgradeScreen : UiPage
             upgradeButton.title.text = upgrade.title;
             upgradeButton.description.text = upgrade.description;
         }
+    }
+    private ScalableUpgrade GetRandomUpgrade()
+    {
+        float totalWeight = 0f;
+        foreach (var upgrade in availableUpgrades)
+        {
+            totalWeight += rarityWeights[upgrade.rarity];
+        }
+
+        float randomValue = Random.Range(0, totalWeight);
+        float cumulativeWeight = 0f;
+
+        foreach (var upgrade in availableUpgrades)
+        {
+            cumulativeWeight += rarityWeights[upgrade.rarity];
+            if (randomValue <= cumulativeWeight)
+            {
+                return upgrade;
+            }
+        }
+
+        return availableUpgrades[0]; // fallback
     }
 
     public void SelectUpgrade()

@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] public float maxHealth = 2000f;
     [SerializeField] protected float currentHealth;
     [SerializeField] GameObject healthBarPrefab;
+    public float damage = 100;
     protected UiBar healthBarRef;
     public float despawnDistance = 1000f;
     public Transform target;
@@ -62,7 +64,10 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
+    public void TakeDamage(float _damage)
+    {
+        Health -= _damage;   
+    }
     protected void Die()
     {
         OnDeath.Invoke();
@@ -78,10 +83,16 @@ public class Enemy : MonoBehaviour
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         Sword swordRef;
+        PlayerController playerRef;
         if (swordRef = collision.gameObject.GetComponent<Sword>())
         {
-        
-           Health -= swordRef.GetCurrentSwingSpeed();
+
+            Health -= swordRef.GetCurrentSwingSpeed();
+        }
+        else if (playerRef = collision.gameObject.GetComponent<PlayerController>())
+        {
+            playerRef.TakeDamage(damage);
+            rb.AddForce(playerRef.transform.position - transform.position*100);
         }
     }
 

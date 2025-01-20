@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2738a1d3d604929479398585375fdf5f, type: 3}
-  m_Name: Attack Speed Boost
+  m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  title: Attack Speed Boost
-  description: Increases the swing speed of the sword by 10%
-  type: 2
-  baseValue: 1
+  title: Movement Speed
+  description: buffs move speed by 20%
+  type: 3
+  baseValue: 0.2
   scalingType: 3
-  scalingFactor: 0.1
-  rarity: 1
+  scalingFactor: 1
+  rarity: 3

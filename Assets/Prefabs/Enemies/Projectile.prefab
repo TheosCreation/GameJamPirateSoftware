@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5170825499160588006}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   damage: 50
+  reflected: 0
 --- !u!58 &-4734210254598246827
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

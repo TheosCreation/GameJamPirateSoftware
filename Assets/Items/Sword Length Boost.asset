@@ -18,3 +18,4 @@ MonoBehaviour:
   baseValue: 1
   scalingType: 3
   scalingFactor: 0.1
+  rarity: 2

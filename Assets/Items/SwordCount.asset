@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Sword Count
   description: Adds a sword to the player
-  type: 4
+  type: 5
   baseValue: 1
-  scalingType: 3
+  scalingType: 0
   scalingFactor: 0.1
+  rarity: 4

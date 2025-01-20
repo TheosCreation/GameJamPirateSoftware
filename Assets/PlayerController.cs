@@ -12,17 +12,19 @@ public class PlayerController : MonoBehaviour
     public float deceleration = 5f;
     public float moveSpeed = 10f;
     [HideInInspector] public float originalMoveSpeed = 10f;
-    public Sword sword;
+    public GameObject swordPrefab; 
+    public List<Sword> swords = new List<Sword>();
+    public UiBar healthBarRef;
 
     private float currentHealth = 0f;
-    public float maxHealth = 0f;
+    public float maxHealth = 500f;
     public float Health
     {
         get { return currentHealth; }
         protected set
         {
             currentHealth = Mathf.Clamp(value, 0f, maxHealth);
-            UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth);
+            UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth, currentHealth.ToString("F0") + "/" + maxHealth);
             if (currentHealth <= 0f)
             {
                 Die();
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour
     {
         originalMoveSpeed = moveSpeed;
         currentHealth = maxHealth;
-
+        AddSword();
+        UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth, currentHealth.ToString("F0") + "/" + maxHealth);
         InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
     }
 
@@ -60,6 +63,33 @@ public class PlayerController : MonoBehaviour
     {
         OnDeath?.Invoke();
         //Destroy(gameObject);
+    }
+    public void TakeDamage(float _damage)
+    {
+        Health -= _damage;
+    }
+    public void Heal(float _health)
+    {
+        Health += _health;
+    }
+    public void AddSword()
+    {
+        Sword newSword = Instantiate(swordPrefab, transform).GetComponent<Sword>();
+        newSword.GetComponent<HingeJoint2D>().connectedBody = rb;
+        swords.Add(newSword);
+        UpdateSwordPositions();
+    }
+    private void UpdateSwordPositions()
+    {
+        int swordCount = swords.Count;
+        float angleIncrement = 360f / swordCount;
+
+        for (int i = 0; i < swordCount; i++)
+        {
+            float angle = i * angleIncrement;
+            swords[i].transform.localRotation = Quaternion.Euler(0, 0, angle);
+            swords[i].rotationOffset = angle;
+        }
     }
 
     private void MoveWalk()
@@ -89,7 +119,6 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
         }
     }
-
     private void ApplyDeceleration()
     {
         Vector2 currentVelocity = rb.velocity;
