@@ -33,13 +33,9 @@ public class TotalWaveCollapse : MonoBehaviour
 
     private HashSet<Vector2> usedPositions = new HashSet<Vector2>();
 
-    void Start()
+    public void GenerateLevelWrapped()
     {
-        if (runOnStart)
-        {
-            GenerateLevel(Vector2.zero, new Direction[0], 0, nodes[0].data.directions[0]);
-        }
-        meshSurface.BuildNavMesh();
+        GenerateLevel(Vector2.zero, new Direction[0], 0, nodes[0].data.directions[0]);
     }
 
     [ContextMenu("Generate Level (WFC)")]

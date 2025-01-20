@@ -1,10 +1,11 @@
-using System;
 using UnityEngine.UI;
+using UnityEngine;
+using System;
 
 [Serializable]
 public struct UiButton
 {
     public Button button;
-    public string clickFunction;  // Stores the method name to call
-    public string[] parameters;
+    public string clickFunction;
+    public UiPage[] parameters;
 }

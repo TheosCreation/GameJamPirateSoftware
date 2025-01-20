@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-public class MainMenuManager : Singleton<MainMenuManager>, IMenuManager
+public class MainMenuManager : IMenuManager
 {
     private readonly Stack<UiPage> navigationHistory = new Stack<UiPage>();
 
@@ -11,10 +11,8 @@ public class MainMenuManager : Singleton<MainMenuManager>, IMenuManager
 
     private UiPage[] allUiPages;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         //get all UiPage attributes and add them into a array
         allUiPages = GetAllUiPages();
     }
@@ -55,7 +53,7 @@ public class MainMenuManager : Singleton<MainMenuManager>, IMenuManager
         uiPageToActivate.SetActive(true);
     }
 
-    public void Back()
+    public override void Back()
     {
         if (navigationHistory.Count > 1) // Ensure there's a page to go back to
         {

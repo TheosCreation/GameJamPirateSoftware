@@ -4,17 +4,25 @@ public class Sword : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public ParticleSystem swordSwing;
+    private PlayerController player;
     public float rotationSpeed = 10f;
     [HideInInspector] public float originalRotationSpeed = 0f;
 
     private float currentSwingSpeed;
     private float maxSwingSpeed;
     private float previousRotation;
-    public float rotationOffset = 0;
+    public float rotationOffset = 0; 
+    [SerializeField] private float previousSwingSpeed = 0f;
+    [SerializeField] private float swingSpeedThreshold = 10f;
+    [SerializeField] private float shakeMagnitude = 0.5f;
+    [SerializeField] private float shakeFrequency = 300f;
+    [SerializeField] private float shakeDuration = 0.25f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         swordSwing = GetComponentInChildren<ParticleSystem>();
+        player = GetComponentInParent<PlayerController>();
         originalRotationSpeed = rotationSpeed;
     }
 
@@ -27,7 +35,6 @@ public class Sword : MonoBehaviour
     private void CalculateSwingSpeed()
     {
         float rotationDelta = Mathf.DeltaAngle(previousRotation, rb.rotation);
-
         currentSwingSpeed = Mathf.Abs(rotationDelta / Time.fixedDeltaTime);
 
         if (currentSwingSpeed > maxSwingSpeed)
@@ -35,6 +42,13 @@ public class Sword : MonoBehaviour
             maxSwingSpeed = currentSwingSpeed;
         }
 
+        // Detect if the swing speed has increased suddenly
+        if (currentSwingSpeed - previousSwingSpeed < swingSpeedThreshold)
+        {
+            player.TriggerScreenShake(shakeMagnitude, shakeFrequency, shakeDuration);
+        }
+
+        previousSwingSpeed = currentSwingSpeed;
         previousRotation = rb.rotation;
     }
 

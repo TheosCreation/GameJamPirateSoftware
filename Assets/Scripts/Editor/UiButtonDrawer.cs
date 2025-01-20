@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -15,76 +16,123 @@ public class UiButtonDrawer : PropertyDrawer
         var functionNameProperty = property.FindPropertyRelative("clickFunction");
         var parametersProperty = property.FindPropertyRelative("parameters");
 
-        // Display the Button field
+        // Display the Button field using PropertyField (this will properly handle Unity objects)
         Rect buttonRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-        EditorGUI.PropertyField(buttonRect, buttonProperty);
+        EditorGUI.PropertyField(buttonRect, buttonProperty);  // This will display the Button component
 
-        // Get the target object (UiPage) to find its methods
+        // Get the target object (UiPage) and its parent component of type IMenuManager
         var script = property.serializedObject.targetObject as UiPage;
+        var parentMenuManager = script?.GetComponentInParent<IMenuManager>();
 
-        // Validate the script and fetch methods
+        // Store methods for the dropdown
+        var methods = Enumerable.Empty<(string Name, ParameterInfo[] Parameters)>();
+
+        // Fetch methods from the UiPage script
         if (script != null)
         {
-            // Fetch valid methods: public/non-public instance methods defined in the specific script type
-            var methods = script.GetType()
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly) // Exclude inherited methods
-                .Where(m => m.ReturnType == typeof(void)) // Only void return type
-                .Select(m => new { m.Name, Parameters = m.GetParameters() })
-                .Prepend(new { Name = "<None>", Parameters = new ParameterInfo[0] }) // Add a "None" option
-                .ToArray();
+            methods = methods.Concat(
+                script.GetType()
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly)
+                    .Where(m => m.ReturnType == typeof(void))
+                    .Select(m => (m.Name, m.GetParameters()))
+            );
+        }
 
-            // Display the function dropdown
-            string[] methodNames = methods.Select(m => m.Name).ToArray();
-            int selectedIndex = System.Array.IndexOf(methodNames, functionNameProperty.stringValue);
-            if (selectedIndex == -1) selectedIndex = 0;
+        // Fetch methods from the parent IMenuManager
+        if (parentMenuManager != null)
+        {
+            methods = methods.Concat(
+                parentMenuManager.GetType()
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(m => m.ReturnType == typeof(void))
+                    .Select(m => (m.Name, m.GetParameters()))
+            );
+        }
 
-            Rect dropdownRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
-            selectedIndex = EditorGUI.Popup(dropdownRect, "Click Function", selectedIndex, methodNames);
+        // Add a "None" option and convert to array
+        var methodsArray = methods
+            .Prepend(("<None>", new ParameterInfo[0]))
+            .ToArray();
 
-            // Update the property value
-            functionNameProperty.stringValue = selectedIndex > 0 ? methods[selectedIndex].Name : string.Empty;
+        // Display the function dropdown
+        string[] methodNames = methodsArray.Select(m => m.Item1).ToArray(); // Access the first element of the tuple
+        int selectedIndex = Array.IndexOf(methodNames, functionNameProperty.stringValue);
+        if (selectedIndex == -1) selectedIndex = 0;
 
-            // If the selected method has parameters, show input fields
-            var selectedMethod = methods[selectedIndex];
-            if (selectedMethod.Parameters.Length > 0)
+        Rect dropdownRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
+        selectedIndex = EditorGUI.Popup(dropdownRect, "Click Function", selectedIndex, methodNames);
+
+        // Update the property value
+        functionNameProperty.stringValue = selectedIndex > 0 ? methodsArray[selectedIndex].Item1 : string.Empty;
+
+        // If the selected method has parameters, show input fields
+        var selectedMethod = methodsArray[selectedIndex];
+        if (selectedMethod.Item2.Length > 0)  // Use Item2 to get the Parameters array
+        {
+            float yOffset = EditorGUIUtility.singleLineHeight * 2 + 4;
+            for (int i = 0; i < selectedMethod.Item2.Length; i++) // Use Item2 to access parameters
             {
-                float yOffset = EditorGUIUtility.singleLineHeight * 2 + 4;
-                for (int i = 0; i < selectedMethod.Parameters.Length; i++)
+                var param = selectedMethod.Item2[i];  // Use Item2 to access the parameter info
+                Rect paramRect = new Rect(position.x, position.y + yOffset, position.width, EditorGUIUtility.singleLineHeight);
+
+                // Ensure the parameters array size matches the number of method parameters
+                if (parametersProperty.arraySize <= i)
                 {
-                    var param = selectedMethod.Parameters[i];
-                    Rect paramRect = new Rect(position.x, position.y + yOffset, position.width, EditorGUIUtility.singleLineHeight);
+                    parametersProperty.InsertArrayElementAtIndex(i);
+                }
 
-                    // Ensure the parameters array size matches the number of method parameters
-                    if (parametersProperty.arraySize <= i)
-                    {
-                        parametersProperty.InsertArrayElementAtIndex(i);
-                    }
+                SerializedProperty paramProperty = parametersProperty.GetArrayElementAtIndex(i);
 
-                    SerializedProperty paramProperty = parametersProperty.GetArrayElementAtIndex(i);
+                EditorGUI.BeginChangeCheck();
+
+                // Handle different parameter types
+                if (param.ParameterType == typeof(string))
+                {
                     paramProperty.stringValue = EditorGUI.TextField(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.stringValue);
-                    yOffset += EditorGUIUtility.singleLineHeight + 2;
+                }
+                else if (param.ParameterType == typeof(int))
+                {
+                    paramProperty.intValue = EditorGUI.IntField(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.intValue);
+                }
+                else if (param.ParameterType == typeof(float))
+                {
+                    paramProperty.floatValue = EditorGUI.FloatField(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.floatValue);
+                }
+                else if (param.ParameterType == typeof(bool))
+                {
+                    paramProperty.boolValue = EditorGUI.Toggle(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.boolValue);
+                }
+                else if (param.ParameterType.IsSubclassOf(typeof(UnityEngine.Object)))
+                {
+                    // Handle Unity Object references (like UiPage or other Unity components)
+                    paramProperty.objectReferenceValue = EditorGUI.ObjectField(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.objectReferenceValue, param.ParameterType, true);
+                }
+                else
+                {
+                    // For unsupported types, just use the default string field
+                    paramProperty.stringValue = EditorGUI.TextField(paramRect, $"{param.Name} ({param.ParameterType.Name})", paramProperty.stringValue);
                 }
 
-                // Remove extra array elements
-                while (parametersProperty.arraySize > selectedMethod.Parameters.Length)
-                {
-                    parametersProperty.DeleteArrayElementAtIndex(parametersProperty.arraySize - 1);
-                }
+                yOffset += EditorGUIUtility.singleLineHeight + 2;
             }
-            else
+
+            // Remove extra array elements
+            while (parametersProperty.arraySize > selectedMethod.Item2.Length)
             {
-                // Clear parameters if the method takes no arguments
-                parametersProperty.ClearArray();
+                parametersProperty.DeleteArrayElementAtIndex(parametersProperty.arraySize - 1);
             }
         }
         else
         {
-            Rect errorRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(errorRect, "UiPage not found or no valid methods.");
+            // Clear parameters if the method takes no arguments
+            parametersProperty.ClearArray();
         }
 
         EditorGUI.EndProperty();
     }
+
+
+
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
@@ -93,10 +141,15 @@ public class UiButtonDrawer : PropertyDrawer
 
         // Get the target object to check method parameters
         var script = property.serializedObject.targetObject as UiPage;
-        if (script != null && !string.IsNullOrEmpty(functionNameProperty.stringValue))
+        var parentMenuManager = script?.GetComponentInParent<IMenuManager>();
+
+        if (!string.IsNullOrEmpty(functionNameProperty.stringValue))
         {
-            var method = script.GetType()
-                .GetMethod(functionNameProperty.stringValue, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+            // Check methods in the script or the parent IMenuManager
+            var method = script?.GetType()
+                .GetMethod(functionNameProperty.stringValue, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly)
+                ?? parentMenuManager?.GetType()
+                    .GetMethod(functionNameProperty.stringValue, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
 
             if (method != null)
             {

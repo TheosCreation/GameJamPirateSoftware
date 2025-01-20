@@ -1,4 +1,6 @@
-interface IMenuManager
+using UnityEngine;
+
+public abstract class IMenuManager : MonoBehaviour
 {
-    void Back();
+    public abstract void Back();
 }

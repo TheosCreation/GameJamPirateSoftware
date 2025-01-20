@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    private Camera playerCamera;
 
     // Movement smoothing factor
     public float acceleration = 5f;
@@ -15,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public GameObject swordPrefab; 
     public List<Sword> swords = new List<Sword>();
     public UiBar healthBarRef;
+    float shakeTimeRemaining = 0f;
+    float currentShakeMagnitude = 0f;
+
+    [SerializeField]private float shakeFrequency = 10f; // Frequency of the shake
+    [SerializeField]private float shakeAmplitude = 0.5f; // Amplitude of the shake
+    [SerializeField] private float timeElapsed = 0f; // Tracks time for oscillation
 
     private float currentHealth = 0f;
     public float maxHealth = 500f;
@@ -41,15 +49,41 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerCamera = GetComponentInChildren<Camera>();
         originalMoveSpeed = moveSpeed;
         AddSword();
         UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth, currentHealth.ToString("F0") + "/" + maxHealth);
         InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
     }
+
     protected virtual void Start()
     {
         Health = maxHealth;
     }
+
+    private void Update()
+    {
+        if (shakeTimeRemaining > 0)
+        {
+            // Calculate smooth oscillations using sine and cosine
+            float xShake = Mathf.Sin(timeElapsed * shakeFrequency) * currentShakeMagnitude;
+            float yShake = Mathf.Cos(timeElapsed * shakeFrequency) * currentShakeMagnitude;
+
+            // Update camera position with the shake
+            playerCamera.transform.localPosition = new Vector3(xShake, yShake, -1f);
+
+            // Decrease remaining shake time and increase elapsed time
+            shakeTimeRemaining -= Time.deltaTime;
+            timeElapsed += Time.deltaTime;
+        }
+        else
+        {
+            // Reset camera position when shaking ends
+            playerCamera.transform.localPosition = new Vector3(0, 0, -1);
+            timeElapsed = 0f; // Reset elapsed time for the next shake
+        }
+    }
+
 
     private void FixedUpdate()
     {
@@ -67,6 +101,14 @@ public class PlayerController : MonoBehaviour
         OnDeath?.Invoke();
         //Destroy(gameObject);
     }
+
+    public void TriggerScreenShake(float magnitude = 1.0f, float frequency = 300f, float time = 0.1f)
+    {
+        shakeTimeRemaining = time;
+        currentShakeMagnitude = magnitude;
+        shakeFrequency = frequency;
+    }
+
     public void TakeDamage(float _damage)
     {
         Health -= _damage;

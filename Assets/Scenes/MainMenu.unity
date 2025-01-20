@@ -325,6 +325,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 339522720}
     m_Modifications:
+    - target: {fileID: 1011804965455994577, guid: a3fe3ad72c97b2745ad4360dab210300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011804965455994577, guid: a3fe3ad72c97b2745ad4360dab210300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011804965455994577, guid: a3fe3ad72c97b2745ad4360dab210300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1307618566}
+    - target: {fileID: 1011804965455994577, guid: a3fe3ad72c97b2745ad4360dab210300, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4283472301180425535, guid: a3fe3ad72c97b2745ad4360dab210300, type: 3}
       propertyPath: m_Name
       value: Button_Options
@@ -1129,7 +1145,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6454963843656149950}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1177,8 +1193,9 @@ MonoBehaviour:
     clickFunction: StartGame
     parameters: []
   - button: {fileID: 1693005170}
-    clickFunction: OpenOptionMenu
-    parameters: []
+    clickFunction: OpenPage
+    parameters:
+    - {fileID: 1307618567}
   - button: {fileID: 2129883965}
     clickFunction: Quit
     parameters: []
@@ -1237,8 +1254,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3985738934985699033}
   - {fileID: 1307618568}
+  - {fileID: 3985738934985699033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
