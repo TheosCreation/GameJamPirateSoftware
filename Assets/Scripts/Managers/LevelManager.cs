@@ -31,7 +31,7 @@ public class LevelManager : Singleton<LevelManager>
 
 
         levelGenerator.GenerateLevelWrapped();
-        meshSurface.BuildNavMesh();
+ 
 
         StartFirstWave();
     }

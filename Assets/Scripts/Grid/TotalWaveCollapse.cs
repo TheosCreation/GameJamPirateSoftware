@@ -44,6 +44,7 @@ public class TotalWaveCollapse : MonoBehaviour
         if (currentStep >= steps)
         {
             Debug.Log("max steps reached");
+            meshSurface.BuildNavMesh();
             return;
         }
 
