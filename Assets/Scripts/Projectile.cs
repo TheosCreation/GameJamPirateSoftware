@@ -13,22 +13,10 @@ public class Projectile : MonoBehaviour
         rb.AddForce(direction * speed);
     }
 
-    void Update()
-    {
-        if (reflected)
-        {
-
-        }
-
-    }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-    
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
-              collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
             Destroy(gameObject);
         }
         if (reflected)
@@ -46,7 +34,12 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            if (collision.gameObject.CompareTag("Sword"))
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.CompareTag("Sword"))
             {
                 reflected = true;
                 GetComponent<SpriteRenderer>().color = Color.green;

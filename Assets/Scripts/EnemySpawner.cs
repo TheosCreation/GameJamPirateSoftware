@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyFactory enemyFactory;
     private int m_maxEnemiesAlive = 10;
+    private float m_enemySpeedMultiplier = 1f;
     private float m_spawnInterval = 2f;
     [SerializeField] private float innerRadius = 5f; // Minimum distance from the player
     [SerializeField] private float outerRadius = 10f; // Maximum distance from the player
@@ -24,13 +25,14 @@ public class EnemySpawner : MonoBehaviour
 
     public System.Action OnWaveComplete;
 
-    public void StartWave(int totalEnemies, int maxEnemiesAlive, float spawnInterval, Transform player)
+    public void StartWave(int totalEnemies, int maxEnemiesAlive, float spawnInterval, float enemySpeedMultiplier, Transform player)
     {
         enemiesAlive = 0;
         enemiesSpawned = 0;
         enemiesToSpawn = totalEnemies;
         m_spawnInterval = spawnInterval;
         m_maxEnemiesAlive = maxEnemiesAlive;
+        m_enemySpeedMultiplier = enemySpeedMultiplier;
         playerTransform = player;
         StartCoroutine(SpawnEnemies());
     }
@@ -80,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = enemyFactory.CreateEnemy(spawnPosition);
             enemy.target = playerTransform; // Assign the player as the target
             enemy.despawnDistance = enemyDespawnRange; // Assign the player as the target
+            enemy.agent.speed *= m_enemySpeedMultiplier;
             enemy.OnDeath += HandleEnemyDeath;
             enemy.OnDespawn += HandleEnemyDespawn;
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public ParticleSystem swordSwing;
     public float rotationSpeed = 10f;
     [HideInInspector] public float originalRotationSpeed = 0f;
 
@@ -13,6 +14,7 @@ public class Sword : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        swordSwing = GetComponentInChildren<ParticleSystem>();
         originalRotationSpeed = rotationSpeed;
     }
 

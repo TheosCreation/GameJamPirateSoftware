@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.ProbeTouchupVolume;
 
 [CreateAssetMenu(fileName = "NewUpgrade", menuName = "Upgrades/ScalableUpgrade")]
 public class ScalableUpgrade : ScriptableObject
@@ -26,7 +27,7 @@ public class ScalableUpgrade : ScriptableObject
                 break;
 
             case UpgradeType.AttackSpeedBoost:
-                foreach (var sword in player.swords)
+                foreach (Sword sword in player.swords)
                 {
                     effectiveValue = CalculateEffectiveValue(existingCount, sword.rotationSpeed);
                     sword.rotationSpeed += effectiveValue;
@@ -39,10 +40,13 @@ public class ScalableUpgrade : ScriptableObject
                 break;
             
             case UpgradeType.SwordSize:
-                foreach (var sword in player.swords)
+                foreach (Sword sword in player.swords)
                 {
-                    effectiveValue = CalculateEffectiveValue(existingCount, sword.rotationSpeed);
-                    sword.rotationSpeed += effectiveValue;
+                    Vector3 additionalScale = Vector3.zero;
+                    additionalScale.x = CalculateEffectiveValue(existingCount, sword.transform.localScale.x);
+                    additionalScale.y = CalculateEffectiveValue(existingCount, sword.transform.localScale.y);
+
+                    sword.transform.localScale += additionalScale;
                 }
                 break;
             case UpgradeType.SwordCount:
@@ -56,6 +60,7 @@ public class ScalableUpgrade : ScriptableObject
         }
         player.Heal(Mathf.Infinity); // fulll healtyh
     }
+
     public Color GetColorByRarity()
     {
         switch (rarity)
@@ -74,6 +79,7 @@ public class ScalableUpgrade : ScriptableObject
                 return Color.white;
         }
     }
+
     private float CalculateEffectiveValue(int existingCount, float currentValue = 0)
     {
         switch (scalingType)

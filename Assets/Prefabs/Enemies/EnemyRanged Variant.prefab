@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4218743577133767856, guid: e3df62c14a88de3408036387689c603f, type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218743577133767856, guid: e3df62c14a88de3408036387689c603f, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6575792143300758159, guid: e3df62c14a88de3408036387689c603f, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -117,11 +125,16 @@ MonoBehaviour:
   despawnDistance: 1000
   target: {fileID: 0}
   healthBarCanvas: {fileID: 0}
+  agent: {fileID: 0}
   enemyVisuals: {fileID: 8236686874403848104}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   moveSpeed: 2
-  shootingDistance: 50
+  shootingDistance: 20
   projectilePrefab: {fileID: 6601969460489948903, guid: 150ee648de82f9744980f669610815b4, type: 3}
   shootingCooldown: 1
+  reactionTime: 0.5
 --- !u!1 &8236686874403848104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6575792143300758159, guid: e3df62c14a88de3408036387689c603f, type: 3}

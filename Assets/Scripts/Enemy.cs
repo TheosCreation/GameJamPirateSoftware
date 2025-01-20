@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,8 +13,9 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public GameObject healthBarCanvas;
     protected Rigidbody2D rb;
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
     [SerializeField] protected GameObject enemyVisuals;
+    [SerializeField] protected LayerMask obstacleLayerMask;
     [SerializeField] protected float moveSpeed = 5f;
     public float Health
     {
@@ -36,15 +36,18 @@ public class Enemy : MonoBehaviour
 
     public Action OnDeath;
     public Action OnDespawn;
-
-    protected virtual void Start()
+    protected void Awake()
     {
+
         rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
 
-        healthBarCanvas =  Instantiate(healthBarPrefab, enemyVisuals.transform);
+        healthBarCanvas = Instantiate(healthBarPrefab, enemyVisuals.transform);
         healthBarRef = healthBarCanvas.GetComponentInChildren<UiBar>();
+    }
 
+    protected virtual void Start()
+    {
         Health = maxHealth;
     }
 
@@ -98,16 +101,21 @@ public class Enemy : MonoBehaviour
 
     protected bool HasLineOfSight()
     {
-
         Vector3 direction = target.position - transform.position;
+
+        // Draw a debug ray for visualization
         Debug.DrawRay(transform.position, direction, Color.red);
-        if (Physics2D.Raycast(transform.position, direction))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, obstacleLayerMask);
+        // Check if the raycast hits something
+        if (hit.collider != null)
         {
-            return true;
+            // Line of sight is blocked
+            return false;
         }
         else
         {
-            return false;
+            // No obstacle in the way, line of sight is clear
+            return true;
         }
     }
 }

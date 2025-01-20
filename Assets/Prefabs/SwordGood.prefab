@@ -133,9 +133,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0, y: 0.58}
+      - {x: -0.5, y: -0.29}
+      - {x: -0.34718758, y: -0.48103145}
+      - {x: -0.1589272, y: -0.5301908}
+      - {x: 0.14677909, y: -0.5281137}
+      - {x: 0.3461148, y: -0.47168735}
+      - {x: 0.5, y: -0.29}
   m_UseDelaunayMesh: 0
 --- !u!1 &1963184004121260254
 GameObject:
@@ -250,10 +254,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2669237038280497286}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.75, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4739487741399811394}
   - {fileID: 3699269255149155069}
@@ -273,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  swordSwing: {fileID: 0}
   rotationSpeed: 10
   originalRotationSpeed: 0
   rotationOffset: 0
@@ -437,7 +442,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 7060440797020811632}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3

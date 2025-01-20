@@ -121,7 +121,11 @@ MonoBehaviour:
   despawnDistance: 1000
   target: {fileID: 0}
   healthBarCanvas: {fileID: 0}
+  agent: {fileID: 0}
   enemyVisuals: {fileID: 6575792143300758159}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   moveSpeed: 5
 --- !u!195 &4218743577133767856
 NavMeshAgent:
@@ -133,7 +137,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 6
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 800

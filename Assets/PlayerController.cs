@@ -42,10 +42,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         originalMoveSpeed = moveSpeed;
-        currentHealth = maxHealth;
         AddSword();
         UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth, currentHealth.ToString("F0") + "/" + maxHealth);
         InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
+    }
+    protected virtual void Start()
+    {
+        Health = maxHealth;
     }
 
     private void FixedUpdate()

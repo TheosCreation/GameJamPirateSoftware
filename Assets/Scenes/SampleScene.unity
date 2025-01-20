@@ -836,6 +836,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 6037110787586671958, guid: 105be53b32562554ea8683d16216d128, type: 3}
+      propertyPath: innerRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037110787586671958, guid: 105be53b32562554ea8683d16216d128, type: 3}
+      propertyPath: outerRadius
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8411319948518333236, guid: 105be53b32562554ea8683d16216d128, type: 3}
       propertyPath: enemiesPrefab.Array.size
       value: 2
@@ -1132,7 +1140,7 @@ GameObject:
   - component: {fileID: 1497081460}
   - component: {fileID: 1497081462}
   - component: {fileID: 1497081461}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1537,9 +1545,25 @@ PrefabInstance:
       value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: currentWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
       propertyPath: enemySpawner
       value: 
       objectReference: {fileID: 1210413271}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: initialEnemiesPerWave
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: initialMaxEnemyPerWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: enemySpeedMultiplierIncreaseIncrement
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5470903893985236023, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
