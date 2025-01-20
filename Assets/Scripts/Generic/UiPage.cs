@@ -81,16 +81,17 @@ public class UiPage : MonoBehaviour
 
             for (int i = 0; i < paramInfos.Length; i++)
             {
-                //if (uiButton.parameters != null && uiButton.parameters.Length > i)
-                //{
-                //     //methodParams[i] = ConvertParameter(uiButton.parameters[i], paramInfos[i].ParameterType);
-                //}
-                //else
-                //{
-                //    methodParams[i] = paramInfos[i].HasDefaultValue
-                //        ? paramInfos[i].DefaultValue
-                //        : GetDefault(paramInfos[i].ParameterType); // Fallback to default
-                //}
+                if (uiButton.parameters != null && uiButton.parameters.Length > i)
+                {
+                     methodParams[i] = uiButton.parameters[i];
+                     //methodParams[i] = ConvertParameter(, paramInfos[i].ParameterType);
+                }
+                else
+                {
+                    methodParams[i] = paramInfos[i].HasDefaultValue
+                        ? paramInfos[i].DefaultValue
+                        : GetDefault(paramInfos[i].ParameterType); // Fallback to default
+                }
             }
 
             method.Invoke(method.DeclaringType == GetType() ? this : menuManager, methodParams);

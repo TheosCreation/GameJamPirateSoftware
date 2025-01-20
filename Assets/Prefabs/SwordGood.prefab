@@ -281,6 +281,11 @@ MonoBehaviour:
   rotationSpeed: 10
   originalRotationSpeed: 0
   rotationOffset: 0
+  previousSwingSpeed: 0
+  swingSpeedThreshold: -350
+  shakeMagnitude: 0.3
+  shakeFrequency: 20
+  shakeDuration: 0.15
 --- !u!50 &3112629938625059435
 Rigidbody2D:
   serializedVersion: 4
