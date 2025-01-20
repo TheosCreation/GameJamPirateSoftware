@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Sword : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
@@ -11,12 +12,18 @@ public class Sword : MonoBehaviour
     private float currentSwingSpeed;
     private float maxSwingSpeed;
     private float previousRotation;
-    public float rotationOffset = 0; 
+    public float rotationOffset = 0;
     [SerializeField] private float previousSwingSpeed = 0f;
     [SerializeField] private float swingSpeedThreshold = 10f;
     [SerializeField] private float shakeMagnitude = 0.5f;
     [SerializeField] private float shakeFrequency = 300f;
     [SerializeField] private float shakeDuration = 0.25f;
+
+    private AudioSource audioSource;
+    [SerializeField] private float minPitch = 0.5f;
+    [SerializeField] private float maxPitch = 1.5f;
+    [SerializeField] private float minVolume = 0.5f;
+    [SerializeField] private float maxVolume = 1.0f;
 
     private void Awake()
     {
@@ -24,6 +31,7 @@ public class Sword : MonoBehaviour
         swordSwing = GetComponentInChildren<ParticleSystem>();
         player = GetComponentInParent<PlayerController>();
         originalRotationSpeed = rotationSpeed;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -42,16 +50,25 @@ public class Sword : MonoBehaviour
             maxSwingSpeed = currentSwingSpeed;
         }
 
-        // Detect if the swing speed has increased suddenly
-        if (currentSwingSpeed - previousSwingSpeed < swingSpeedThreshold)
+  
+
+        float speedChange = previousSwingSpeed - currentSwingSpeed;
+        if (speedChange > swingSpeedThreshold)
         {
-            player.TriggerScreenShake(shakeMagnitude, shakeFrequency, shakeDuration);
+            float shakeIntensity = Mathf.Lerp(shakeMagnitude, shakeMagnitude * 2, speedChange / swingSpeedThreshold);
+            float shakeFreq = Mathf.Lerp(shakeFrequency, shakeFrequency * 2, speedChange / swingSpeedThreshold);
+            player.TriggerScreenShake(shakeIntensity, shakeFreq, shakeDuration);
+
+            float speedRatio = currentSwingSpeed / maxSwingSpeed;
+            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, 1 - speedRatio);
+            audioSource.volume = Mathf.Lerp(minVolume, maxVolume, 1 - speedRatio);
+            audioSource.Play();
+
         }
 
         previousSwingSpeed = currentSwingSpeed;
         previousRotation = rb.rotation;
     }
-
 
     private void RotateTowardsMouse()
     {
@@ -60,7 +77,7 @@ public class Sword : MonoBehaviour
         float angle = rotationOffset + Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
         float rotation = Mathf.LerpAngle(rb.rotation, angle, rotationSpeed * Time.deltaTime);
-        rb.MoveRotation(rotation );
+        rb.MoveRotation(rotation);
     }
 
     public float GetCurrentSwingSpeed()
