@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
@@ -14,6 +15,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private float spawnIntervalMultiplier = 0.9f;
     [SerializeField] private float spawnIntervalCap = 0.1f;
 
+    [SerializeField] private TotalWaveCollapse levelGenerator;
+    [SerializeField] private NavMeshSurface meshSurface;
+
     private float currentEnemySpeedIncreaseMultiplier = 1f;
 
     public int currentWave = 1;
@@ -24,6 +28,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         Player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         enemySpawner.OnWaveComplete += ChooseUpgrade;
+
+
+        levelGenerator.GenerateLevelWrapped();
+        meshSurface.BuildNavMesh();
 
         StartFirstWave();
     }

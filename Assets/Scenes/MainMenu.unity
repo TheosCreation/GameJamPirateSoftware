@@ -1177,8 +1177,9 @@ MonoBehaviour:
     clickFunction: StartGame
     parameters: []
   - button: {fileID: 1693005170}
-    clickFunction: OpenOptionMenu
-    parameters: []
+    clickFunction: OpenPage
+    parameters:
+    - name: 
   - button: {fileID: 2129883965}
     clickFunction: Quit
     parameters: []

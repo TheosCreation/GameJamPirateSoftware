@@ -1549,9 +1549,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: meshSurface
+      value: 
+      objectReference: {fileID: 400640233}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
       propertyPath: enemySpawner
       value: 
       objectReference: {fileID: 1210413271}
+    - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
+      propertyPath: levelGenerator
+      value: 
+      objectReference: {fileID: 610804908}
     - target: {fileID: 3979742463148624824, guid: 7b24daa766feed64e8c24b4177228181, type: 3}
       propertyPath: initialEnemiesPerWave
       value: 6

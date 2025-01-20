@@ -7,11 +7,6 @@ public class StartMenu : UiPage
         GameManager.Instance.StartGame();
     }
 
-    public void OpenOptionMenu()
-    {
-        MainMenuManager.Instance.OpenPage(MainMenuManager.Instance.optionsPage);
-    }
-
     public void Quit()
     {
         GameManager.Instance.Quit();
