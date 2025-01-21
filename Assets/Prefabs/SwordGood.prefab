@@ -288,8 +288,8 @@ MonoBehaviour:
   shakeMagnitude: 0.3
   shakeFrequency: 20
   shakeDuration: 0.15
-  minPitch: 0.5
-  maxPitch: 1.5
+  minPitch: 0.3
+  maxPitch: 0.45
   minVolume: 0.5
   maxVolume: 1
 --- !u!50 &3112629938625059435
@@ -558,7 +558,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1193,7 +1193,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.5
+      value: 2.3
       mode: 1
       spread: 0
       speed:
@@ -1766,7 +1766,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 41827
+        atime0: 10023
         atime1: 65535
         atime2: 0
         atime3: 0
@@ -5377,15 +5377,15 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 1
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.315
-  m_Color: {r: 0.5188861, g: 1, b: 0.4509434, a: 1}
-  m_Intensity: 2.09
-  m_LightVolumeIntensity: 1
-  m_LightVolumeEnabled: 0
+  m_FalloffIntensity: 0.742
+  m_Color: {r: 0.13725495, g: 1, b: 0, a: 1}
+  m_Intensity: 0.5
+  m_LightVolumeIntensity: 0.1
+  m_LightVolumeEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: -1
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
@@ -5396,10 +5396,10 @@ MonoBehaviour:
   m_ShadowSoftness: 0.3
   m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
+  m_ShadowVolumeIntensity: 0.693
   m_LocalBounds:
-    m_Center: {x: 0.017750025, y: 0.005850017, z: 0}
-    m_Extent: {x: 3.03665, y: 1.26385, z: 0}
+    m_Center: {x: 0.018050075, y: 0.004349947, z: 0}
+    m_Extent: {x: 3.53695, y: 1.76115, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5407,10 +5407,11 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -2.5174034, y: -0.06819326, z: 0}
+  - {x: -2.2456143, y: -0.21497366, z: 0}
   - {x: 0.086981416, y: -0.2855238, z: 0}
   - {x: 0.241823, y: -0.3723304, z: 0}
   - {x: 0.39200827, y: -0.34817773, z: 0}
@@ -5418,15 +5419,11 @@ MonoBehaviour:
   - {x: 0.70991933, y: -0.24132332, z: 0}
   - {x: 0.7410193, y: -0.3447308, z: 0}
   - {x: 0.87101936, y: -0.36474022, z: 0}
-  - {x: 1.0209193, y: -0.30336758, z: 0}
-  - {x: 1.0036417, y: -0.49984202, z: 0}
+  - {x: 0.97332865, y: -0.41916505, z: 0}
   - {x: 0.9276195, y: -0.6549532, z: 0}
   - {x: 0.9690861, y: -0.7583607, z: 0}
   - {x: 1.1349529, y: -0.73423207, z: 0}
-  - {x: 1.3077303, y: -0.42400965, z: 0}
-  - {x: 1.349197, y: -0.49984196, z: 0}
-  - {x: 1.2558972, y: -0.5894613, z: 0}
-  - {x: 1.2628084, y: -0.69286907, z: 0}
+  - {x: 1.2522622, y: -0.6327941, z: 0}
   - {x: 1.4553596, y: -0.695074, z: 0}
   - {x: 1.5497622, y: -0.67693335, z: 0}
   - {x: 1.6424531, y: -0.6496159, z: 0}
@@ -5434,8 +5431,6 @@ MonoBehaviour:
   - {x: 1.7814895, y: -0.5540045, z: 0}
   - {x: 1.7783296, y: -0.49621755, z: 0}
   - {x: 1.7351439, y: -0.42792374, z: 0}
-  - {x: 1.6708924, y: -0.43317723, z: 0}
-  - {x: 1.6498262, y: -0.39535284, z: 0}
   - {x: 1.7583166, y: -0.29869094, z: 0}
   - {x: 1.8109823, y: -0.15474856, z: 0}
   - {x: 2.0816824, y: -0.13373502, z: 0}
@@ -5454,10 +5449,7 @@ MonoBehaviour:
   - {x: 1.7812252, y: 0.14343122, z: 0}
   - {x: 1.7841208, y: 0.21026762, z: 0}
   - {x: 1.7191464, y: 0.30618933, z: 0}
-  - {x: 1.6490896, y: 0.36209464, z: 0}
-  - {x: 1.6012862, y: 0.3719603, z: 0}
-  - {x: 1.5979894, y: 0.418, z: 0}
-  - {x: 1.6680461, y: 0.4188222, z: 0}
+  - {x: 1.7058516, y: 0.37545463, z: 0}
   - {x: 1.6738155, y: 0.45417398, z: 0}
   - {x: 1.6309571, y: 0.58736026, z: 0}
   - {x: 1.5229872, y: 0.6120244, z: 0}
@@ -5465,24 +5457,16 @@ MonoBehaviour:
   - {x: 1.3532025, y: 0.68519455, z: 0}
   - {x: 1.2262762, y: 0.67286247, z: 0}
   - {x: 1.2090231, y: 0.64728606, z: 0}
-  - {x: 1.2110965, y: 0.56110954, z: 0}
-  - {x: 1.316841, y: 0.45149288, z: 0}
-  - {x: 1.3133854, y: 0.3922034, z: 0}
-  - {x: 1.2793251, y: 0.38566637, z: 0}
+  - {x: 1.1760783, y: 0.56996536, z: 0}
   - {x: 1.0460494, y: 0.6975377, z: 0}
   - {x: 0.9567568, y: 0.76681393, z: 0}
-  - {x: 0.8906141, y: 0.77011293, z: 0}
-  - {x: 0.8310858, y: 0.7206301, z: 0}
-  - {x: 0.8773858, y: 0.6150661, z: 0}
-  - {x: 0.96337116, y: 0.4666173, z: 0}
-  - {x: 0.9666783, y: 0.36765137, z: 0}
-  - {x: 0.9090301, y: 0.3266652, z: 0}
-  - {x: 0.8277787, y: 0.36105365, z: 0}
+  - {x: 0.9096007, y: 0.7650043, z: 0}
+  - {x: 0.8515232, y: 0.714328, z: 0}
+  - {x: 0.9287073, y: 0.36811915, z: 0}
   - {x: 0.7914003, y: 0.33796176, z: 0}
-  - {x: 0.7153362, y: 0.30167407, z: 0}
   - {x: 0.6062011, y: 0.31157064, z: 0}
-  - {x: 0.5433655, y: 0.26538697, z: 0}
-  - {x: 0.4507656, y: 0.27528313, z: 0}
-  - {x: 0.21595928, y: 0.36105376, z: 0}
+  - {x: 0.4925514, y: 0.3051699, z: 0}
+  - {x: 0.3102462, y: 0.35129505, z: 0}
   - {x: 0.08698121, y: 0.28517973, z: 0}
+  - {x: -2.237795, y: 0.14644216, z: 0}
   - {x: -2.518588, y: 0.042765897, z: 0}

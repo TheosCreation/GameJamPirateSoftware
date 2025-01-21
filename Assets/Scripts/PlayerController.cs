@@ -99,7 +99,10 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         OnDeath?.Invoke();
-        //Destroy(gameObject);
+        PauseManager.Instance.PauseNoScreen();
+        LevelManager.Instance.GameOver();
+        Destroy(gameObject);
+        UiManager.Instance.OpenGameOverScreen();
     }
 
     public void TriggerScreenShake(float magnitude = 1.0f, float frequency = 300f, float time = 0.1f)

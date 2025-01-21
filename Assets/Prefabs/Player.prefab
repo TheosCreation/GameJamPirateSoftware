@@ -210,6 +210,9 @@ MonoBehaviour:
   swordPrefab: {fileID: 2669237038280497286, guid: e8426111e760d9941b08448e575dd8d9, type: 3}
   swords: []
   healthBarRef: {fileID: 0}
+  shakeFrequency: 10
+  shakeAmplitude: 0.5
+  timeElapsed: 0
   maxHealth: 1000
   upgrades: []
   isMoving: 0
@@ -341,7 +344,6 @@ GameObject:
   - component: {fileID: 7684765097326873403}
   - component: {fileID: 4151751155657112799}
   - component: {fileID: 1768285971905167936}
-  - component: {fileID: 6242008224481655783}
   m_Layer: 0
   m_Name: Soul
   m_TagString: Untagged
@@ -5186,16 +5188,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6242008224481655783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8365356997153780459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e8a78d9e5376040bf2c945539de929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Prefab: {fileID: 8916649874493168582, guid: 6b0150dc6682be541b239d49ddd606bd, type: 3}

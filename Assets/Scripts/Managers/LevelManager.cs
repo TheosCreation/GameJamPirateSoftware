@@ -1,4 +1,7 @@
 using NavMeshPlus.Components;
+using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
@@ -24,16 +27,27 @@ public class LevelManager : Singleton<LevelManager>
     public float currentSpawnInterval = 1f;
     public PlayerController Player { get; private set; }
 
-    private void Start()
+    private async void Start()
     {
         Player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         enemySpawner.OnWaveComplete += ChooseUpgrade;
 
 
+        // Start level generation
         levelGenerator.GenerateLevelWrapped();
- 
 
+        // Wait until level generation is complete
+        while (levelGenerator.isGenerating)
+        {
+            await Task.Yield();
+        }
+
+        await meshSurface.BuildNavMeshAsync();
+
+        // Call StartFirstWave after level generation completes
         StartFirstWave();
+
+        UiManager.Instance.OpenPlayerHud();
     }
 
     private void StartFirstWave()
@@ -64,5 +78,14 @@ public class LevelManager : Singleton<LevelManager>
         PauseManager.Instance.PauseNoScreen();
         PauseManager.Instance.canUnpause = false;
         StartNextWave();
+    }
+
+    public void GameOver()
+    {
+        Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
     }
 }

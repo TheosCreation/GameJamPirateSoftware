@@ -1,64 +1,80 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
-using Unity.VisualScripting;
-
-using Random = UnityEngine.Random;
-
-
+using System.Threading.Tasks;
+using UnityEngine;
 
 [Serializable]
-
 public struct Node
 {
     public GridData data;
 }
+
 public class TotalWaveCollapse : MonoBehaviour
 {
     [Header("Generation Settings")]
     public int steps = 20;
 
-    [Header("Run on start")]
-    public bool runOnStart = false;
+    [Header("Start Parameters")]
+    public bool debugMode = false;
 
     [Header("Generation")]
     public GridGenerator gridGenerator;
     public bool generateVisualGridOnComplete = true;
     public Node[] nodes;
 
-    [Header("Nav Mesh")]
-    public NavMeshPlus.Components.NavMeshSurface meshSurface; 
-
-
     private HashSet<Vector2> usedPositions = new HashSet<Vector2>();
+
+    public bool isGenerating = false;
 
     public void GenerateLevelWrapped()
     {
-        GenerateLevel(Vector2.zero, new Direction[0], 0, nodes[0].data.directions[0]);
+        GenerateLevelAsync(Vector2.zero, new Direction[0], 0, nodes[0].data.directions[0]);
     }
 
     [ContextMenu("Generate Level (WFC)")]
-    public void GenerateLevel(Vector2 cursorPos, Direction[] openDirections, int currentStep, Direction newDirection)
+    public async void GenerateLevelAsync(Vector2 cursorPos, Direction[] openDirections, int currentStep, Direction newDirection)
+    {
+        if (isGenerating)
+        {
+            Debug.LogWarning("Level generation is already in progress.");
+            return;
+        }
+
+        isGenerating = true;
+
+        try
+        {
+            await GenerateLevelCoroutine(cursorPos, openDirections, currentStep, newDirection);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error during level generation: {ex.Message}");
+        }
+        finally
+        {
+            isGenerating = false;
+        }
+    }
+
+    private async Task GenerateLevelCoroutine(Vector2 cursorPos, Direction[] openDirections, int currentStep, Direction newDirection)
     {
         if (currentStep >= steps)
         {
-            Debug.Log("max steps reached");
-            meshSurface.BuildNavMesh();
+            if (debugMode) Debug.Log("Generation stopped or max steps reached.");
             return;
         }
 
         Node? node = GetRandomNodeWithDirections(newDirection);
         if (node == null)
         {
-            Debug.Log("null node found");
+            if (debugMode) Debug.Log("No valid node found.");
             return;
         }
 
         GridData data = node.Value.data;
         if (data == null)
         {
-            Debug.Log("null data found");
+            if(debugMode) Debug.Log("Node data is null.");
             return;
         }
 
@@ -70,16 +86,19 @@ public class TotalWaveCollapse : MonoBehaviour
 
         usedPositions.Add(cursorPos);
 
+        // Wait for a frame to allow halting or visualization
+        await Task.Yield();
+
         foreach (Direction direction in openDirections)
         {
             Vector2 newCursorPos = cursorPos + direction.ToVector2();
             if (!usedPositions.Contains(newCursorPos))
             {
-                GenerateLevel(newCursorPos, openDirections, currentStep + 1, direction);
+                await GenerateLevelCoroutine(newCursorPos, openDirections, currentStep + 1, direction);
             }
             else
             {
-                Debug.Log("no position found");
+                if (debugMode) Debug.Log("Position already used.");
             }
         }
     }
@@ -116,4 +135,3 @@ public class TotalWaveCollapse : MonoBehaviour
         return true;
     }
 }
-

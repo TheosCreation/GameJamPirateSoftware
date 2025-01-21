@@ -13,7 +13,7 @@ public class Sword : MonoBehaviour
     private float maxSwingSpeed;
     private float previousRotation;
     public float rotationOffset = 0;
-    [SerializeField] private float previousSwingSpeed = 0f;
+    [SerializeField] private float previousSwingSpeed = -1000f;
     [SerializeField] private float swingSpeedThreshold = 10f;
     [SerializeField] private float shakeMagnitude = 0.5f;
     [SerializeField] private float shakeFrequency = 300f;

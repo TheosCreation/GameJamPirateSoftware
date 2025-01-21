@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
     public Action OnDespawn;
     protected void Awake()
     {
-
         rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
 

@@ -6,6 +6,7 @@ public class GameManager : SingletonPersistent<GameManager>
     
     public void ExitToMainMenu()
     {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void Quit()
