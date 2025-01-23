@@ -8,6 +8,7 @@ public class PauseManager : Singleton<PauseManager>
     private void Start()
     {
         CheckPaused();
+        Cursor.visible = true;
     }
 
     private void CheckPaused()
@@ -46,8 +47,6 @@ public class PauseManager : Singleton<PauseManager>
         Time.timeScale = 0;
 
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     public void PauseNoScreen()
@@ -65,7 +64,6 @@ public class PauseManager : Singleton<PauseManager>
         Time.timeScale = 1;
         InputManager.Instance.EnableInGameInput();
         UiManager.Instance.PauseMenu(false);
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 }

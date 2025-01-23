@@ -284,13 +284,13 @@ MonoBehaviour:
   originalRotationSpeed: 0
   rotationOffset: 0
   previousSwingSpeed: 0
-  swingSpeedThreshold: 350
+  swingSpeedThreshold: 100
   shakeMagnitude: 0.3
   shakeFrequency: 20
   shakeDuration: 0.15
-  minPitch: 0.3
-  maxPitch: 0.45
-  minVolume: 0.5
+  minPitch: 0.5
+  maxPitch: 0.75
+  minVolume: 0.1
   maxVolume: 1
 --- !u!50 &3112629938625059435
 Rigidbody2D:
@@ -357,7 +357,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 64367b1ebba5fc046b007133202b407f, type: 3}
   m_Resource: {fileID: 8300000, guid: 64367b1ebba5fc046b007133202b407f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

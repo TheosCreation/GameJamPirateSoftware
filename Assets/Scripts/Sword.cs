@@ -62,7 +62,10 @@ public class Sword : MonoBehaviour
             float speedRatio = currentSwingSpeed / maxSwingSpeed;
             audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, 1 - speedRatio);
             audioSource.volume = Mathf.Lerp(minVolume, maxVolume, 1 - speedRatio);
-            audioSource.Play();
+            if (!audioSource.isPlaying || audioSource.time >= audioSource.clip.length / 2)
+            {
+                audioSource.Play();
+            }
 
         }
 
