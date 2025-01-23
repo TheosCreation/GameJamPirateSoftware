@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         playerCamera = GetComponentInChildren<Camera>();
         originalMoveSpeed = moveSpeed;
         AddSword();
-        UiManager.Instance.playerHud.healthBar.UpdateBar(currentHealth / maxHealth, currentHealth.ToString("F0") + "/" + maxHealth);
         InputManager.Instance.playerInput.Universal.Escape.started += _ctx => PauseManager.Instance.TogglePause();
     }
 
