@@ -181,6 +181,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -719,7 +732,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dingbats-396_0: -6478812619191030624
+      dingbats-396_1: -761261976280624139
+      dingbats-396_10: 2577015358627028449
+      dingbats-396_11: -6026178123017014961
+      dingbats-396_12: 3511276621390561489
+      dingbats-396_13: -7951354873592230920
+      dingbats-396_14: 1879032172341542962
+      dingbats-396_15: 5553440021412876088
+      dingbats-396_16: -119548091029504625
+      dingbats-396_17: 4092649038754853447
+      dingbats-396_18: 3508138651030922234
+      dingbats-396_19: -2164235262974044709
+      dingbats-396_2: -8075481466634429473
+      dingbats-396_20: 5773975269297653599
+      dingbats-396_21: -3207562616986550607
+      dingbats-396_22: 1207090718363741512
+      dingbats-396_23: -3217072784556589569
+      dingbats-396_24: 2358491507681468383
+      dingbats-396_3: 7657441186708904558
+      dingbats-396_4: 8323806703597971536
+      dingbats-396_5: 9150682143512750036
+      dingbats-396_6: 2061062953272861588
+      dingbats-396_7: -6207842270771548842
+      dingbats-396_8: 1579871150360744016
+      dingbats-396_9: 5400165552491008146
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

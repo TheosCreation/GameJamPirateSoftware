@@ -208,6 +208,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -935,7 +948,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      target_25_0: 7697870913048427969
+      target_25_1: -8731674433168900632
+      target_25_10: -8739006907551746407
+      target_25_11: -269491296217504367
+      target_25_12: 9072932819901380521
+      target_25_13: -3881693151075715780
+      target_25_14: -2139767810912473521
+      target_25_15: -7505933365504531053
+      target_25_16: -4209940051204104840
+      target_25_17: -4448246620079320139
+      target_25_18: -1428292603310650804
+      target_25_19: 7553278117832377961
+      target_25_2: 3424980905100339663
+      target_25_20: -2883474913498310967
+      target_25_21: 1160391023057764030
+      target_25_22: -6330737862637037144
+      target_25_23: -5727231838151181871
+      target_25_24: 6605093244481197661
+      target_25_25: 1778697332102876183
+      target_25_26: 5595491765614128864
+      target_25_27: -4882891311958820948
+      target_25_28: -3565705027104338969
+      target_25_29: -1739698585349429269
+      target_25_3: 810818967526421910
+      target_25_30: 6870296762888753930
+      target_25_31: 3284113674389350349
+      target_25_32: 5162043697104485749
+      target_25_33: -7390982811477008880
+      target_25_4: -3725123729636537228
+      target_25_5: -6394681808200035504
+      target_25_6: 7719694823215949651
+      target_25_7: 6106765368356947871
+      target_25_8: 15993242088240721
+      target_25_9: -5353565003040737701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

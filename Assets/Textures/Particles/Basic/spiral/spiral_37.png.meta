@@ -223,6 +223,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1055,7 +1068,46 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spiral_37_0: 7184617154869752358
+      spiral_37_1: 8689190045468629725
+      spiral_37_10: -152098465487145428
+      spiral_37_11: 6510486898180347586
+      spiral_37_12: 4978074146199424553
+      spiral_37_13: 3194047523204400928
+      spiral_37_14: -243070765394462714
+      spiral_37_15: -5003906229100895555
+      spiral_37_16: 7243092162533507827
+      spiral_37_17: -2591050419287208469
+      spiral_37_18: -8428601891244298700
+      spiral_37_19: 5184923544089835949
+      spiral_37_2: -5717538506182113084
+      spiral_37_20: 9012821207353236315
+      spiral_37_21: -3676502076671901021
+      spiral_37_22: -5721259450388727004
+      spiral_37_23: -1271424297381512583
+      spiral_37_24: 622215444339300169
+      spiral_37_25: -6359021935437555980
+      spiral_37_26: 2459332357832628147
+      spiral_37_27: 7207270727367802257
+      spiral_37_28: -3509495704777097620
+      spiral_37_29: -2742789231767059208
+      spiral_37_3: 6095919789091451011
+      spiral_37_30: 3941986464119110359
+      spiral_37_31: -3440121612496052418
+      spiral_37_32: -6388827650228780476
+      spiral_37_33: 7618796960270966822
+      spiral_37_34: 5904428050409698802
+      spiral_37_35: 4121462069056836285
+      spiral_37_36: -5883688346415076366
+      spiral_37_37: -7794753489641087390
+      spiral_37_38: 5550759039661528160
+      spiral_37_4: -1810853823356079052
+      spiral_37_5: -6074527349241412804
+      spiral_37_6: 3324836834723456877
+      spiral_37_7: 8718213579378716573
+      spiral_37_8: 6971596816029717186
+      spiral_37_9: -346757230416188680
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

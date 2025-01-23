@@ -205,6 +205,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -911,7 +924,40 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dingbats-423_0: 7635777944142784643
+      dingbats-423_1: 4627731256972650507
+      dingbats-423_10: 646035480646401793
+      dingbats-423_11: 8693272101541513830
+      dingbats-423_12: 6504893731924076357
+      dingbats-423_13: -249468008627954210
+      dingbats-423_14: 7457465397278833078
+      dingbats-423_15: -3450146049240698162
+      dingbats-423_16: 740186130696191175
+      dingbats-423_17: 1391634738997351373
+      dingbats-423_18: 3325592044594553145
+      dingbats-423_19: 5939528505849390980
+      dingbats-423_2: -8885379131963130465
+      dingbats-423_20: 5689564220156852392
+      dingbats-423_21: -942595642721343933
+      dingbats-423_22: -7880482488663661757
+      dingbats-423_23: -5343703576466008829
+      dingbats-423_24: 7006835076692168133
+      dingbats-423_25: -6675239909360625417
+      dingbats-423_26: 7193777069238057212
+      dingbats-423_27: -3946498869363261899
+      dingbats-423_28: -8697212414297584812
+      dingbats-423_29: -6317195978278098450
+      dingbats-423_3: 9038175148410277275
+      dingbats-423_30: 9201424090587333068
+      dingbats-423_31: -4778296442275419269
+      dingbats-423_32: -6646992252219309457
+      dingbats-423_4: 8127180761827037142
+      dingbats-423_5: 8416577873572066341
+      dingbats-423_6: 6158046295182188209
+      dingbats-423_7: -7362280938995667528
+      dingbats-423_8: 4265438909600060587
+      dingbats-423_9: 3712013272532987707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

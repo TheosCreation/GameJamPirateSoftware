@@ -205,6 +205,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -911,7 +924,40 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      target_38_0: -4725334758123703635
+      target_38_1: -4196193143668096103
+      target_38_10: 8597928074032658999
+      target_38_11: -1848788190779711461
+      target_38_12: 6391517405989193320
+      target_38_13: 1891402077944664924
+      target_38_14: 2033532043316865758
+      target_38_15: 2618746420827119078
+      target_38_16: 9089739118959931840
+      target_38_17: -1952285294255637921
+      target_38_18: -4996849186051742278
+      target_38_19: -5593019828114557627
+      target_38_2: -1931654703534980373
+      target_38_20: 3606838801853092420
+      target_38_21: 6983322811034756531
+      target_38_22: -5090121783490716479
+      target_38_23: 8302715993915871064
+      target_38_24: 6608283793181974793
+      target_38_25: -8346053575457582298
+      target_38_26: -3250460031658201567
+      target_38_27: 2207786982170278020
+      target_38_28: -166602373879302181
+      target_38_29: 2752299205110377518
+      target_38_3: 7320922574112739539
+      target_38_30: -1583770263263230581
+      target_38_31: 7875894188572543415
+      target_38_32: 4847076234377347043
+      target_38_4: 6727525909022922553
+      target_38_5: 5889191865959518363
+      target_38_6: -7063937804861023795
+      target_38_7: -8821857657961205810
+      target_38_8: 7895911152944107115
+      target_38_9: -6424157731485903378
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

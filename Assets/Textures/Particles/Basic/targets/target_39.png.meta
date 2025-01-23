@@ -268,6 +268,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1415,7 +1428,61 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      target_39_0: -3797357398259087215
+      target_39_1: -1662230861152499702
+      target_39_10: 8690617150092610897
+      target_39_11: -203008736420710569
+      target_39_12: -4838267085013531856
+      target_39_13: 5422051523877774396
+      target_39_14: -9173610477460441605
+      target_39_15: -1765063844966306675
+      target_39_16: 7406017732166543375
+      target_39_17: -6170654613992595922
+      target_39_18: 777866888699815651
+      target_39_19: -4642487478358246880
+      target_39_2: 961548367232502990
+      target_39_20: 3886965738899684913
+      target_39_21: 3448771092035187101
+      target_39_22: -2034027339619923276
+      target_39_23: 8858809291435409313
+      target_39_24: -7760760314949630489
+      target_39_25: 8610354875333425110
+      target_39_26: 944578753975879554
+      target_39_27: -8943605006220918998
+      target_39_28: -3929755849146530790
+      target_39_29: 8956929798899779835
+      target_39_3: -653890536641914146
+      target_39_30: -1595935067470053404
+      target_39_31: -2058997270521056273
+      target_39_32: 7396883768306666082
+      target_39_33: 8680805988193999532
+      target_39_34: 8159399041816476103
+      target_39_35: -8547620658444324172
+      target_39_36: 8690453156987671198
+      target_39_37: 6488529497229701790
+      target_39_38: -6634924630227357558
+      target_39_39: 3695935529150931176
+      target_39_4: -3955890396078271581
+      target_39_40: -2481546616745451677
+      target_39_41: 1117684047821775024
+      target_39_42: 1097014654835482205
+      target_39_43: 4964707789453631287
+      target_39_44: -1313738792410043857
+      target_39_45: -4629699533717769657
+      target_39_46: -4364973593144928148
+      target_39_47: 1597406641898825751
+      target_39_48: -4078701309117287775
+      target_39_49: 1745774656403174170
+      target_39_5: 1863216431173354819
+      target_39_50: 4215508705974100926
+      target_39_51: 487608964522632349
+      target_39_52: -8755831983577258452
+      target_39_53: -8803198732857933476
+      target_39_6: -2805276084062689303
+      target_39_7: -705826164205267605
+      target_39_8: 3800932962517221936
+      target_39_9: 6028111961912010733
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

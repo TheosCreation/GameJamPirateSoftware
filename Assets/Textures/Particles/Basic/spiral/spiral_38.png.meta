@@ -148,6 +148,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -455,7 +468,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spiral_38_0: 7497976916659977382
+      spiral_38_1: 5273419226911490263
+      spiral_38_10: 5207333024354063094
+      spiral_38_11: 6598105656281323069
+      spiral_38_12: 5356374868044620021
+      spiral_38_13: -4903048119794416776
+      spiral_38_2: 7054461148575648928
+      spiral_38_3: -5757810393961464613
+      spiral_38_4: 2003877366132650745
+      spiral_38_5: -527191741565405806
+      spiral_38_6: 2573847315368432991
+      spiral_38_7: -2926248210654599545
+      spiral_38_8: 8378092846396582355
+      spiral_38_9: 2715693186752998807
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

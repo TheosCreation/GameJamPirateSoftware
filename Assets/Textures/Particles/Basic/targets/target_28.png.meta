@@ -223,6 +223,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1055,7 +1068,46 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      target_28_0: -5990406038091974530
+      target_28_1: 261430020322239857
+      target_28_10: 1017988646257453594
+      target_28_11: -8152773053794738395
+      target_28_12: -5118449894245549218
+      target_28_13: -7727168278703271447
+      target_28_14: 3791111205261029087
+      target_28_15: -5604926898835960167
+      target_28_16: 1744387292544568523
+      target_28_17: -2376278769804202932
+      target_28_18: -6115019329410784991
+      target_28_19: -6887760627743481932
+      target_28_2: -1324411561150935162
+      target_28_20: -5200446433800966588
+      target_28_21: -7833155047239621381
+      target_28_22: -7313564019406461175
+      target_28_23: -1847938515071579846
+      target_28_24: 4158436847339684318
+      target_28_25: -2095863917439324020
+      target_28_26: -4900627168917408265
+      target_28_27: 3742449445699715297
+      target_28_28: 6586204964600985160
+      target_28_29: 41660499834625682
+      target_28_3: -7654983940638616454
+      target_28_30: -4818895311940897995
+      target_28_31: -8919180136286370259
+      target_28_32: 7373578691064117757
+      target_28_33: -5401166584062467288
+      target_28_34: -1588218429353535534
+      target_28_35: 139719308299630797
+      target_28_36: -8229038306883305685
+      target_28_37: -5662401075576800501
+      target_28_38: -5309478697409946516
+      target_28_4: 4722283739842609752
+      target_28_5: 838912652040006306
+      target_28_6: -2649252836825023336
+      target_28_7: 1356434242770735311
+      target_28_8: -5990107512717243739
+      target_28_9: 5091963065688537034
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

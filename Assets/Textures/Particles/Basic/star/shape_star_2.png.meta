@@ -169,6 +169,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -623,7 +636,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      shape_star_2_0: -3870585480069786476
+      shape_star_2_1: 1476398748607903877
+      shape_star_2_10: 1541715031001651476
+      shape_star_2_11: -311344889652357509
+      shape_star_2_12: 3565397958649619107
+      shape_star_2_13: -4141195430578340793
+      shape_star_2_14: 1703995854209173727
+      shape_star_2_15: 6679071800445704675
+      shape_star_2_16: -6103425206622721423
+      shape_star_2_17: 5345418990071671804
+      shape_star_2_18: 8811352313881279963
+      shape_star_2_19: 3389158455928199323
+      shape_star_2_2: 4453425827724036962
+      shape_star_2_20: -887642617884333982
+      shape_star_2_3: 3010715217527545574
+      shape_star_2_4: 4611026532087334101
+      shape_star_2_5: 982305248591501059
+      shape_star_2_6: -8891996452066028852
+      shape_star_2_7: -8693834580492721101
+      shape_star_2_8: -2167118410429865885
+      shape_star_2_9: -8614538250373336269
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

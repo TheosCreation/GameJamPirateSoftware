@@ -211,6 +211,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -959,7 +972,42 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      target_32_0: -7205487147993010446
+      target_32_1: -2728743647586076185
+      target_32_10: -539009766905608032
+      target_32_11: -6571845017440552057
+      target_32_12: -1571952639957130517
+      target_32_13: -6322070258737304074
+      target_32_14: 7785087571759453283
+      target_32_15: 7557574619788614280
+      target_32_16: -8660060785135811089
+      target_32_17: 960388869147022912
+      target_32_18: 2159306638493988272
+      target_32_19: -2290490608243151865
+      target_32_2: 2722090201024370412
+      target_32_20: 7190401097383021066
+      target_32_21: 9139964195918530136
+      target_32_22: 5329847914497953211
+      target_32_23: -8651535681540742749
+      target_32_24: -8002684052053530199
+      target_32_25: -3765365115311460074
+      target_32_26: 5616740908076558890
+      target_32_27: -190651318275357084
+      target_32_28: 1982200418268650449
+      target_32_29: -4591730007881596822
+      target_32_3: -4584653517629147537
+      target_32_30: 2644800362708715832
+      target_32_31: -3724432938206528030
+      target_32_32: -307059842201875364
+      target_32_33: -8805354125418568228
+      target_32_34: -1539362087091623169
+      target_32_4: -1208265216311724535
+      target_32_5: 74248903440185882
+      target_32_6: 1254258686066613484
+      target_32_7: 535931140556135023
+      target_32_8: 5444467793634155003
+      target_32_9: -2987416462946439122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
